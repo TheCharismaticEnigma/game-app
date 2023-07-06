@@ -37,7 +37,7 @@ const NavBar = () => {
               colorMode === 'light' ? 'black' : 'rgba(255,255,255,0.3)'
             }`}
             type="text"
-            placeholder={`Search from 850,051 games`}
+            placeholder={`Search from 851,081 games`}
             autoCorrect="off"
           ></Input>
         </FormControl>
