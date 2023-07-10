@@ -2,16 +2,11 @@ import axios from 'axios';
 
 //  const key = `b3edbbccbb684a8b88a68744acbcf2df`;
 
-export default function RogueHttpService(
-  path: string,
-  key = `b3edbbccbb684a8b88a68744acbcf2df`
-) {
-  const fullUrl = `https://api.rawg.io/api/${path}?key=${key}`;
+const HttpService = axios.create({
+  baseURL: 'https://api.rawg.io/api',
+  params: {
+    key: `b3edbbccbb684a8b88a68744acbcf2df`,
+  },
+});
 
-  const result = axios
-    .get(fullUrl)
-    .then((response) => response.data.results)
-    .catch((error) => error);
-
-  return result;
-}
+export default HttpService;

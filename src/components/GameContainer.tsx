@@ -1,18 +1,29 @@
-import { Box, Heading, Grid, GridItem, Flex } from '@chakra-ui/react';
+import { Grid, GridItem } from '@chakra-ui/react';
 import GameCard from './GameCard';
+import { Game } from '../hooks/useGames';
+interface GameContainerProps {
+  games: Game[];
+}
 
-const GameContainer = () => {
-  const border = `2px solid teal`;
+const GameContainer = (Props: GameContainerProps) => {
+  const { games } = Props;
 
   return (
     <>
-      <Grid templateColumns={'repeat(3,1fr)'} gap={'3rem'}>
-        <GameCard />
-        <GameCard />
-        <GameCard />
-        <GameCard />
-        <GameCard />
-        <GameCard />
+      <Grid
+        as={'ul'}
+        padding={'0 0.5rem '}
+        templateColumns={'repeat(3, 1fr)'}
+        gap={'2rem'}
+      >
+        {games.map((game) => {
+          console.log(game);
+          return (
+            <GridItem as={'li'} key={game.id}>
+              <GameCard game={game} />
+            </GridItem>
+          );
+        })}
       </Grid>
     </>
   );
