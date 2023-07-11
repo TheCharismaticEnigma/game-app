@@ -2,11 +2,18 @@ import { useState, useEffect } from 'react';
 import { AxiosError } from 'axios';
 import HttpService from '../utils/RogueHttpService';
 
+interface Platform {
+  id: number;
+  name: string;
+  slug: string;
+}
 interface Game {
   id: number;
   name: string;
   slug: string;
   background_image: string;
+  metacritic: number;
+  parent_platforms: { platform: Platform }[];
 }
 
 interface FetchGamesResponse {
@@ -27,13 +34,10 @@ const useGames = () => {
     })
       .then((response) => {
         setGames(response.data.results);
-        console.log(response.data.results);
       })
       .catch((error: AxiosError) => {
         setError(error);
       });
-
-    HttpService.get('/genres').then((response) => console.log(response));
 
     return () => controller.abort();
   }, []);

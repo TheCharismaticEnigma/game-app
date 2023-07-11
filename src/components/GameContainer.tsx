@@ -16,8 +16,8 @@ const GameContainer = (Props: GameContainerProps) => {
         templateColumns={'repeat(3, 1fr)'}
         gap={'2rem'}
       >
-        {games.map((game) => {
-          console.log(game);
+        {games.map((game, index) => {
+          if (index < 4) console.log(game.parent_platforms);
           return (
             <GridItem as={'li'} key={game.id}>
               <GameCard game={game} />

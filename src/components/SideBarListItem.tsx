@@ -19,16 +19,15 @@ const SideBarListItem = (Props: Props) => {
           borderRadius={'10px'}
           objectFit="cover"
           src={image_background}
-          alt="Dan Abramov"
+          alt={name}
         />
         <Button
           onClick={(event) => handleClick(event)}
           fontSize={'1.6rem'}
           overflow={'hidden'}
           variant={'ghost'}
-          fontWeight={'400'}
-          value={slug}
-          colorScheme="teal"
+          fontWeight={'600'}
+          colorScheme="white"
           size="lg"
         >
           {name.length > 15 ? name.split(' ')[0] : name}

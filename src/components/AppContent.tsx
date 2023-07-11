@@ -48,7 +48,12 @@ function AppContent() {
 
         <Box w={'100%'} pr={'1rem'}>
           <Flex mb={'3rem'} gap={'2rem'} as={'div'} direction={'column'}>
-            <Heading color={'purple.300'} fontSize={'8xl'} as={'h1'}>
+            <Heading
+              color={'#6dc849'}
+              fontWeight={'500'}
+              fontSize={'8xl'}
+              as={'h1'}
+            >
               TOP PICKS
             </Heading>
 

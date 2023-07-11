@@ -8,19 +8,19 @@ import {
   ButtonGroup,
   Button,
   HStack,
+  Flex,
 } from '@chakra-ui/react';
 
 import { Card, CardBody, CardFooter } from '@chakra-ui/react';
 import { Game } from '../hooks/useGames';
+import getPlatformIcon from '../utils/PlatformIcons';
 
 interface CardProps {
   game: Game;
 }
 
 const GameCard = (Props: CardProps) => {
-  const {
-    game: { background_image, name, slug },
-  } = Props;
+  const { background_image, name, metacritic, parent_platforms } = Props.game;
 
   return (
     <>
@@ -38,12 +38,29 @@ const GameCard = (Props: CardProps) => {
           borderRadius="lg"
         />
         <CardBody>
-          <Stack mt="3" spacing="5">
-            <HStack justifyContent={'space-between'} border={'2px solid teal'}>
-              <Box>"stores[]"</Box>
-              <Box>"metacritic"</Box>
+          <Stack mt="4" spacing="5">
+            <HStack pointerEvents={'none'} justifyContent={'space-between'}>
+              <Flex alignItems={'center'} gap={'0.5rem'}>
+                {parent_platforms.map(({ platform }) => {
+                  return getPlatformIcon(platform);
+                })}
+              </Flex>
+
+              <Box
+                color="#6dc849"
+                border-color="rgba(109,200,73,.4)"
+                border={'1.5px solid '}
+                borderRadius={'5px'}
+                padding={'0.1rem 0.5rem'}
+                textAlign={'center'}
+                fontWeight={'500'}
+                fontSize={'small'}
+              >
+                {metacritic}
+              </Box>
             </HStack>
-            <Heading size="2xl" lineHeight={'1.2'}>
+
+            <Heading size="2xl" lineHeight={'1.2'} fontWeight={'600'}>
               {name}
             </Heading>
             <Text>
