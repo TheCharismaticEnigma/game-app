@@ -18,6 +18,7 @@ interface FetchGenreResponse {
 const useGenres = () => {
   const [genres, setGenres] = useState<Genre[]>([]);
   const [error, setError] = useState<AxiosError>();
+  const [isLoading, setLoadingStatus] = useState<boolean>(true);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -28,15 +29,17 @@ const useGenres = () => {
     })
       .then((response) => {
         setGenres(response.data.results);
+        setLoadingStatus(false);
       })
       .catch((error: AxiosError) => {
         setError(error);
+        setLoadingStatus(false);
       });
 
     return () => controller.abort();
   }, []);
 
-  return { genres, error };
+  return { genres, error, isLoading };
 };
 
-export default useGenres;
+export { type Genre, useGenres };

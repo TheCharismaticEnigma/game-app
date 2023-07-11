@@ -23,10 +23,10 @@ const SideBarListItem = (Props: Props) => {
         />
         <Button
           onClick={(event) => handleClick(event)}
-          fontSize={'1.6rem'}
+          fontSize={'1.7rem'}
           overflow={'hidden'}
-          variant={'ghost'}
-          fontWeight={'600'}
+          variant={'link'}
+          fontWeight={'500'}
           colorScheme="white"
           size="lg"
         >

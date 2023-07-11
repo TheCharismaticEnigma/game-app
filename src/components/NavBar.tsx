@@ -4,6 +4,7 @@ import { SearchIcon } from '@chakra-ui/icons';
 import { useColorMode } from '@chakra-ui/react';
 
 import logo from '../assets/logo.webp';
+import { color } from 'framer-motion';
 
 const NavBar = () => {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -24,17 +25,24 @@ const NavBar = () => {
 
         <FormControl>
           <SearchIcon
+            _hover={{ color: 'black ' }}
             boxSize={8}
             position={'absolute'}
             transform={'translate(50%,50%)'}
           />
           <Input
+            _placeholder={{
+              color: `${
+                colorMode === 'dark' ? 'rgba(255,255,255,0.7)' : 'black'
+              }`,
+            }}
+            _hover={{ border: '0.5px solid white' }}
             fontSize={'2rem'}
             h={'4rem'}
             padding={'1px 5px 1px 5rem'}
             borderRadius={'2.5rem '}
             border={`0.5px solid ${
-              colorMode === 'light' ? 'black' : 'rgba(255,255,255,0.3)'
+              colorMode === 'light' ? 'black' : 'rgba(255,255,255,0.5)'
             }`}
             type="text"
             placeholder={`Search from 851,081 games`}

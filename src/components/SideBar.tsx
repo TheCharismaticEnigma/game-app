@@ -1,14 +1,10 @@
 import { BaseSyntheticEvent } from 'react';
 import { List, ListItem, Flex } from '@chakra-ui/react';
+import { Genre } from '../hooks/useGenres';
 import SideBarListItem from './SideBarListItem';
 
 export interface SideBarProps {
-  genres: {
-    id: number;
-    name: string;
-    slug: string;
-    image_background: string;
-  }[];
+  genres: Genre[];
 }
 
 const SideBar = (Props: SideBarProps) => {

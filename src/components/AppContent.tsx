@@ -8,8 +8,9 @@ import {
   Select,
   Text,
   Icon,
-  border,
 } from '@chakra-ui/react';
+
+import { Spinner } from '@chakra-ui/react';
 
 // COMPONENTS Should only be responsible for rendering markup.
 // Rest funtionality should be in other files. Import as required.
@@ -20,16 +21,27 @@ import { BiSolidGridAlt, BiSolidCard } from 'react-icons/bi';
 import SideBar from './SideBar';
 import GameContainer from './GameContainer';
 import { useGames } from '../hooks/useGames';
-import useGenres from '../hooks/useGenres';
+import { useGenres } from '../hooks/useGenres';
 
 function AppContent() {
-  const { games, error } = useGames();
-  const { genres, error: genreError } = useGenres();
+  const { games, error, isLoading: loadingImages } = useGames();
+  const { genres, error: genreError, isLoading: loadingGenres } = useGenres();
 
   return (
     <>
       <Flex pt={'1rem'} gap={'0.5rem'} as="section" minH={'80vh'}>
         <Box width={'min(100%, 22rem)'}>
+          {loadingGenres && (
+            <Spinner
+              thickness="5px"
+              speed="0.55s"
+              emptyColor="gray.200"
+              color="red.500"
+              size="xl"
+              margin={'40%'}
+            />
+          )}
+
           {genreError?.name === 'AxiosError' && (
             <Text
               color={'red.400'}
@@ -121,6 +133,17 @@ function AppContent() {
               </Flex>
             </Flex>
           </Flex>
+
+          {loadingImages && (
+            <Spinner
+              margin={'0 45%'}
+              thickness="5px"
+              speed="0.55s"
+              emptyColor="gray.200"
+              color="red.500"
+              size="xl"
+            />
+          )}
 
           {error?.name === 'AxiosError' && (
             <Text

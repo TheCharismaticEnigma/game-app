@@ -17,7 +17,7 @@ const GameContainer = (Props: GameContainerProps) => {
         gap={'2rem'}
       >
         {games.map((game, index) => {
-          if (index < 4) console.log(game.parent_platforms);
+          if (index < 4) console.log(game);
           return (
             <GridItem as={'li'} key={game.id}>
               <GameCard game={game} />
