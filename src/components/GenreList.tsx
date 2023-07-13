@@ -1,15 +1,18 @@
+import { useRef } from 'react';
 import { Box, Stack, Image, Button } from '@chakra-ui/react';
-import { useRef, useState } from 'react';
 import { Genre } from '../hooks/useGenres';
 
 interface Props {
   genre: Genre;
+  isSelectedGenre: boolean;
   updateGenre: (genre: Genre) => void;
 }
 
-const GenreList = ({ genre, updateGenre }: Props) => {
+const GenreList = ({ genre, isSelectedGenre, updateGenre }: Props) => {
   const { image_background, name, slug } = genre;
-  const [isActive, setActiveState] = useState(false);
+
+  const fontSize = `${isSelectedGenre ? '1.75' : '1.6'}rem`;
+  const color = `${isSelectedGenre ? 'purple' : 'white'}`;
 
   const buttonRef = useRef<HTMLButtonElement>(null);
 
@@ -26,16 +29,15 @@ const GenreList = ({ genre, updateGenre }: Props) => {
         <Button
           onClick={() => {
             updateGenre(genre);
-            setActiveState(!isActive);
           }}
-          fontSize={'1.7rem'}
           overflow={'hidden'}
           variant={'link'}
           fontWeight={'500'}
-          colorScheme={`${isActive ? 'teal' : 'white'}`}
           size="lg"
           value={slug}
           ref={buttonRef}
+          fontSize={fontSize}
+          colorScheme={color}
         >
           {name.length > 15 ? name.split(' ')[0] : name}
         </Button>

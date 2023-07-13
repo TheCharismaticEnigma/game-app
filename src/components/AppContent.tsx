@@ -38,7 +38,6 @@ function AppContent() {
   const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null);
 
   const retrieveGenre = (genre: Genre) => {
-    console.log(genre);
     setSelectedGenre(genre);
   };
 
@@ -62,7 +61,11 @@ function AppContent() {
           {genreErrorisAxios && null}
 
           {!genreErrorisAxios && (
-            <SideBar genres={genres} getSelectedGenre={retrieveGenre} />
+            <SideBar
+              genres={genres}
+              selectedGenre={selectedGenre}
+              getSelectedGenre={retrieveGenre}
+            />
           )}
         </Box>
 

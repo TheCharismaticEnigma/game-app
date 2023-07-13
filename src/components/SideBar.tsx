@@ -4,11 +4,12 @@ import GenreList from './GenreList';
 
 export interface SideBarProps {
   genres: Genre[];
+  selectedGenre: Genre | null;
   getSelectedGenre: (genre: Genre) => void;
 }
 
 const SideBar = (Props: SideBarProps) => {
-  const { genres, getSelectedGenre } = Props;
+  const { genres, selectedGenre, getSelectedGenre } = Props;
 
   return (
     <>
@@ -22,7 +23,11 @@ const SideBar = (Props: SideBarProps) => {
           {genres.map((genre) => {
             return (
               <ListItem key={genre.id}>
-                <GenreList genre={genre} updateGenre={getSelectedGenre} />
+                <GenreList
+                  genre={genre}
+                  isSelectedGenre={genre.id === selectedGenre?.id}
+                  updateGenre={getSelectedGenre}
+                />
               </ListItem>
             );
           })}
