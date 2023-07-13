@@ -11,6 +11,7 @@ interface Game {
   background_image: string;
   metacritic: number;
   parent_platforms: { platform: Platform }[];
+  rating_top: number;
 }
 
 // Finally block doesn't work in effect hook.

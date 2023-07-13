@@ -38,8 +38,11 @@ const GenreList = ({ genre, isSelectedGenre, updateGenre }: Props) => {
           ref={buttonRef}
           fontSize={fontSize}
           colorScheme={color}
+          whiteSpace={'normal'}
+          textAlign={'left'}
+          lineHeight={'1.2'}
         >
-          {name.length > 15 ? name.split(' ')[0] : name}
+          {name}
         </Button>
       </Stack>
     </Box>

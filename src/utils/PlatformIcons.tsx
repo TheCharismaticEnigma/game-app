@@ -3,26 +3,29 @@ import { SiXbox } from 'react-icons/si';
 import { IoLogoPlaystation } from 'react-icons/io';
 import { RiMacbookLine } from 'react-icons/ri';
 import { FcLinux } from 'react-icons/fc';
-import { Icon } from '@chakra-ui/react';
 import { IconType } from 'react-icons';
+import { Icon } from '@chakra-ui/react';
 
-const slugs: string[] = ['pc', 'xbox', 'playstation', 'mac', 'linux'];
+type IconMap = {
+  [key: string]: IconType;
+};
 
-const icons: IconType[] = [
-  HiOutlineComputerDesktop,
-  SiXbox,
-  IoLogoPlaystation,
-  RiMacbookLine,
-  FcLinux,
-];
+const iconsMap: IconMap = {
+  pc: HiOutlineComputerDesktop,
+  xbox: SiXbox,
+  playstation: IoLogoPlaystation,
+  mac: RiMacbookLine,
+  linux: FcLinux,
+};
 
-export default function getPlatformIcon(platform: {
+export default function getPlatformIcon({
+  slug,
+  id,
+}: {
   id: number;
   slug: string;
 }) {
-  const index = slugs.indexOf(platform.slug);
+  if (!iconsMap[slug]) return null;
 
-  if (index === -1) return null;
-
-  return <Icon key={platform.id} boxSize={'1.7rem'} as={icons[index]} />;
+  return <Icon key={id} boxSize={'1.7rem'} as={iconsMap[slug]} />;
 }

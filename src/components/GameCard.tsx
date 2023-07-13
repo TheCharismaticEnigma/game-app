@@ -1,26 +1,23 @@
 import {
-  Box,
   Image,
   Stack,
   Heading,
-  Text,
-  Divider,
-  ButtonGroup,
-  Button,
   HStack,
   Flex,
+  Badge,
+  Box,
 } from '@chakra-ui/react';
-
 import { Card, CardBody, CardFooter } from '@chakra-ui/react';
 import { Game } from '../hooks/useGames';
 import getPlatformIcon from '../utils/PlatformIcons';
-
+import getCroppedImageUrl from '../utils/getCroppedImageUrl';
 interface CardProps {
   game: Game;
 }
 
 const GameCard = (Props: CardProps) => {
   const { background_image, name, metacritic, parent_platforms } = Props.game;
+  const metaColor = `${metacritic > 75 ? '#6dc849' : 'yellow'}`;
 
   return (
     <>
@@ -34,7 +31,7 @@ const GameCard = (Props: CardProps) => {
         height={'100%'}
       >
         <Image
-          src={background_image}
+          src={getCroppedImageUrl(background_image)}
           h={'55%'}
           objectFit={'cover'}
           alt="Green double couch with wooden legs"
@@ -50,9 +47,8 @@ const GameCard = (Props: CardProps) => {
               </Flex>
 
               <Box
-                color="#6dc849"
-                border-color="rgba(109,200,73,.4)"
-                border={'1.5px solid '}
+                color={metaColor}
+                border={`1.5px solid ${metaColor}`}
                 borderRadius={'5px'}
                 padding={'0.1rem 0.5rem'}
                 textAlign={'center'}

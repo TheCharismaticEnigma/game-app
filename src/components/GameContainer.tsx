@@ -27,21 +27,21 @@ const GameContainer = (Props: GameContainerProps) => {
             return <CardSkeleton key={skeleton} />;
           })}
 
-        {games.map((game, index) => {
-          // if (index < 4) console.log(game);
-
-          return (
-            <GridItem
-              border={'1px solid teal'}
-              minW={'33rem'}
-              maxW={'75rem'}
-              as={'li'}
-              key={game.id}
-            >
-              <GameCard game={game} />
-            </GridItem>
-          );
-        })}
+        {!isLoading &&
+          games.map((game, index) => {
+            if (index < 3) console.log(game);
+            return (
+              <GridItem
+                border={'1px solid teal'}
+                minW={'33rem'}
+                maxW={'75rem'}
+                as={'li'}
+                key={game.id}
+              >
+                <GameCard game={game} />
+              </GridItem>
+            );
+          })}
       </Grid>
     </>
   );
