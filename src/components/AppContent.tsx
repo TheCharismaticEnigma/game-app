@@ -1,31 +1,48 @@
 // Common parent that manages the State for both Sidebar and App Content.
+import { useState } from 'react';
 
 import {
   Flex,
   Box,
   Spacer,
   Heading,
-  Select,
+  Spinner,
   Text,
-  Icon,
+  useColorMode,
 } from '@chakra-ui/react';
-
-import { Spinner } from '@chakra-ui/react';
-
-// COMPONENTS Should only be responsible for rendering markup.
-// Rest funtionality should be in other files. Import as required.
-// Transfer effect hook into another custom hook.
-
-import { BiSolidGridAlt, BiSolidCard } from 'react-icons/bi';
 
 import SideBar from './SideBar';
 import GameContainer from './GameContainer';
 import { useGames } from '../hooks/useGames';
-import { useGenres } from '../hooks/useGenres';
+import { Genre, useGenres } from '../hooks/useGenres';
+import Dropdowns from './Dropdowns';
 
 function AppContent() {
-  const { games, error, isLoading: loadingImages } = useGames();
-  const { genres, error: genreError, isLoading: loadingGenres } = useGenres();
+  const { colorMode } = useColorMode();
+
+  const {
+    data: games,
+    error: imageError,
+    isLoading: loadingImages,
+  } = useGames();
+
+  const {
+    data: genres,
+    error: genreError,
+    isLoading: loadingGenres,
+  } = useGenres();
+
+  const genreErrorisAxios = genreError?.name === 'AxiosError';
+  const imageErrorisAxios = imageError?.name === 'AxiosError';
+
+  const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null);
+
+  const retrieveGenre = (genre: Genre) => {
+    console.log(genre);
+    setSelectedGenre(genre);
+  };
+
+  // Sort the games with selected genre
 
   return (
     <>
@@ -42,18 +59,11 @@ function AppContent() {
             />
           )}
 
-          {genreError?.name === 'AxiosError' && (
-            <Text
-              color={'red.400'}
-              fontStyle={'italic'}
-              textAlign={'center'}
-              fontSize={'3xl'}
-            >
-              {genreError?.message.toUpperCase()}
-            </Text>
-          )}
+          {genreErrorisAxios && null}
 
-          {genreError?.name !== 'AxiosError' && <SideBar genres={genres} />}
+          {!genreErrorisAxios && (
+            <SideBar genres={genres} getSelectedGenre={retrieveGenre} />
+          )}
         </Box>
 
         <Spacer />
@@ -61,7 +71,7 @@ function AppContent() {
         <Box w={'100%'} pr={'1rem'}>
           <Flex mb={'3rem'} gap={'2rem'} as={'div'} direction={'column'}>
             <Heading
-              color={'#6dc849'}
+              color={`${colorMode === 'dark' ? '#6dc849' : '#671ddf'}`}
               fontWeight={'500'}
               fontSize={'8xl'}
               as={'h1'}
@@ -69,94 +79,23 @@ function AppContent() {
               TOP PICKS
             </Heading>
 
-            <Flex
-              as="div"
-              padding={'0 0.5rem '}
-              justifyContent={'space-between'}
-              alignItems={'center'}
-            >
-              <Flex gap={'1.5rem'}>
-                <Select
-                  cursor={'pointer'}
-                  fontSize={'2rem'}
-                  fontFamily={'cursive'}
-                  size={'lg'}
-                  borderColor={'teal.600'}
-                  placeholder={`Order by `}
-                  width={'15rem'}
-                  textAlign={'left'}
-                >
-                  <option value=""></option>
-                </Select>
-
-                <Select
-                  cursor={'pointer'}
-                  fontSize={'2rem'}
-                  fontFamily={'cursive'}
-                  size={'lg'}
-                  borderColor={'teal.600'}
-                  placeholder={`Platforms`}
-                  textAlign={'left'}
-                  width={'15rem'}
-                >
-                  <option value="xbox">XBOX</option>
-                </Select>
-              </Flex>
-
-              <Flex alignItems={'center'} gap={'1rem '}>
-                <Text
-                  fontFamily={'cursive'}
-                  fontSize={'1.5rem'}
-                  fontStyle={'italic'}
-                >
-                  Display Options:{' '}
-                </Text>
-
-                <Icon
-                  color={'teal'}
-                  _hover={{ color: 'teal.400' }}
-                  cursor={'pointer'}
-                  onClick={() => console.log('clicked')}
-                  as={BiSolidCard}
-                  boxSize={'4rem'}
-                  focusable={'true'}
-                ></Icon>
-
-                <Icon
-                  cursor={'pointer'}
-                  focusable={'true'}
-                  as={BiSolidGridAlt}
-                  color={'teal'}
-                  _hover={{ color: 'teal.400' }}
-                  boxSize={'4rem'}
-                ></Icon>
-              </Flex>
-            </Flex>
+            <Dropdowns />
           </Flex>
 
-          {loadingImages && (
-            <Spinner
-              margin={'0 45%'}
-              thickness="5px"
-              speed="0.55s"
-              emptyColor="gray.200"
-              color="red.500"
-              size="xl"
-            />
-          )}
-
-          {error?.name === 'AxiosError' && (
+          {imageErrorisAxios && (
             <Text
               color={'red.400'}
               fontStyle={'italic'}
               textAlign={'center'}
               fontSize={'6xl'}
             >
-              {error?.message.toUpperCase()}
+              {imageError?.message.toUpperCase()}
             </Text>
           )}
 
-          {error?.name !== 'AxiosError' && <GameContainer games={games} />}
+          {!imageErrorisAxios && (
+            <GameContainer isLoading={loadingImages} games={games} />
+          )}
         </Box>
       </Flex>
     </>

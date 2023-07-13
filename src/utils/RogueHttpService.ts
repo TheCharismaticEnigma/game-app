@@ -5,7 +5,7 @@ import axios from 'axios';
 const HttpService = axios.create({
   baseURL: 'https://api.rawg.io/api',
   params: {
-    key: `b3edbbccbb684a8b88a68744acbcf2df`,
+    key: `9458eeb70a3e4c7ab3b0dae9dfcccaa4`,
   },
 });
 

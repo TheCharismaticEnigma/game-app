@@ -24,5 +24,5 @@ export default function getPlatformIcon(platform: {
 
   if (index === -1) return null;
 
-  return <Icon key={platform.id} boxSize={'1.6rem'} as={icons[index]} />;
+  return <Icon key={platform.id} boxSize={'1.7rem'} as={icons[index]} />;
 }

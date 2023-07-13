@@ -1,15 +1,17 @@
 import { Box, Stack, Image, Button } from '@chakra-ui/react';
-import { BaseSyntheticEvent } from 'react';
+import { useRef, useState } from 'react';
+import { Genre } from '../hooks/useGenres';
 
 interface Props {
-  image_background: string;
-  name: string;
-  slug: string;
-  handleClick: (event: BaseSyntheticEvent) => void;
+  genre: Genre;
+  updateGenre: (genre: Genre) => void;
 }
 
-const SideBarListItem = (Props: Props) => {
-  const { image_background, name, slug, handleClick } = Props;
+const GenreList = ({ genre, updateGenre }: Props) => {
+  const { image_background, name, slug } = genre;
+  const [isActive, setActiveState] = useState(false);
+
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   return (
     <Box minH={'50px'} mb={'0.5rem'}>
@@ -22,13 +24,18 @@ const SideBarListItem = (Props: Props) => {
           alt={name}
         />
         <Button
-          onClick={(event) => handleClick(event)}
+          onClick={() => {
+            updateGenre(genre);
+            setActiveState(!isActive);
+          }}
           fontSize={'1.7rem'}
           overflow={'hidden'}
           variant={'link'}
           fontWeight={'500'}
-          colorScheme="white"
+          colorScheme={`${isActive ? 'teal' : 'white'}`}
           size="lg"
+          value={slug}
+          ref={buttonRef}
         >
           {name.length > 15 ? name.split(' ')[0] : name}
         </Button>
@@ -37,4 +44,4 @@ const SideBarListItem = (Props: Props) => {
   );
 };
 
-export default SideBarListItem;
+export default GenreList;

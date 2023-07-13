@@ -31,16 +31,19 @@ const GameCard = (Props: CardProps) => {
         borderRadius={'3xl'}
         overflow={'hidden'}
         width={'100%'}
+        height={'100%'}
       >
         <Image
           src={background_image}
+          h={'55%'}
+          objectFit={'cover'}
           alt="Green double couch with wooden legs"
           borderRadius="lg"
         />
         <CardBody>
           <Stack mt="4" spacing="5">
             <HStack pointerEvents={'none'} justifyContent={'space-between'}>
-              <Flex alignItems={'center'} gap={'0.5rem'}>
+              <Flex alignItems={'center'} gap={'10px'}>
                 {parent_platforms.map(({ platform }) => {
                   return getPlatformIcon(platform);
                 })}
@@ -60,30 +63,18 @@ const GameCard = (Props: CardProps) => {
               </Box>
             </HStack>
 
-            <Heading size="2xl" lineHeight={'1.2'} fontWeight={'600'}>
+            <Heading
+              size="2xl"
+              lineHeight={'1.2'}
+              fontWeight={'600'}
+              width={'90%'}
+            >
               {name}
             </Heading>
-            <Text>
-              This sofa is perfect for modern tropical spaces, baroque inspired
-              spaces, earthy toned spaces and for people who love a chic design
-              with a sprinkle of vintage design.
-            </Text>
-            <Text color="blue.600" fontSize="2xl">
-              $450
-            </Text>
           </Stack>
         </CardBody>
-        <Divider />
-        <CardFooter>
-          <ButtonGroup spacing="2">
-            <Button variant="solid" colorScheme="blue">
-              Buy now
-            </Button>
-            <Button variant="ghost" colorScheme="blue">
-              Add to cart
-            </Button>
-          </ButtonGroup>
-        </CardFooter>
+
+        <CardFooter></CardFooter>
       </Card>
     </>
   );

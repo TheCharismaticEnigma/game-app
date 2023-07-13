@@ -1,17 +1,14 @@
-import { BaseSyntheticEvent } from 'react';
 import { List, ListItem, Flex } from '@chakra-ui/react';
 import { Genre } from '../hooks/useGenres';
-import SideBarListItem from './SideBarListItem';
+import GenreList from './GenreList';
 
 export interface SideBarProps {
   genres: Genre[];
+  getSelectedGenre: (genre: Genre) => void;
 }
 
 const SideBar = (Props: SideBarProps) => {
-  const { genres } = Props;
-
-  const handleButtonClick = (event: BaseSyntheticEvent) =>
-    console.log(event.target?.value);
+  const { genres, getSelectedGenre } = Props;
 
   return (
     <>
@@ -23,16 +20,9 @@ const SideBar = (Props: SideBarProps) => {
       >
         <List width={'85%'}>
           {genres.map((genre) => {
-            const { id, name, slug, image_background } = genre;
             return (
-              <ListItem key={id}>
-                <SideBarListItem
-                  key={id}
-                  slug={slug}
-                  name={name}
-                  image_background={image_background}
-                  handleClick={handleButtonClick}
-                />
+              <ListItem key={genre.id}>
+                <GenreList genre={genre} updateGenre={getSelectedGenre} />
               </ListItem>
             );
           })}

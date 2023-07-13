@@ -4,7 +4,6 @@ import { SearchIcon } from '@chakra-ui/icons';
 import { useColorMode } from '@chakra-ui/react';
 
 import logo from '../assets/logo.webp';
-import { color } from 'framer-motion';
 
 const NavBar = () => {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -31,6 +30,7 @@ const NavBar = () => {
             transform={'translate(50%,50%)'}
           />
           <Input
+            variant={'filled'}
             _placeholder={{
               color: `${
                 colorMode === 'dark' ? 'rgba(255,255,255,0.7)' : 'black'
