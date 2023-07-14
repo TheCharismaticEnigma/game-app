@@ -11,7 +11,7 @@ interface Props {
 const GenreList = ({ genre, isSelectedGenre, updateGenre }: Props) => {
   const { image_background, name, slug } = genre;
 
-  const fontSize = `${isSelectedGenre ? '1.75' : '1.6'}rem`;
+  const fontSize = `${isSelectedGenre ? '1.8' : '1.7'}rem`;
   const color = `${isSelectedGenre ? 'purple' : 'white'}`;
 
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -33,7 +33,6 @@ const GenreList = ({ genre, isSelectedGenre, updateGenre }: Props) => {
           overflow={'hidden'}
           variant={'link'}
           fontWeight={'500'}
-          size="lg"
           value={slug}
           ref={buttonRef}
           fontSize={fontSize}

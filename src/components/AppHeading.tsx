@@ -15,6 +15,7 @@ const AppHeading = (Props: GameHeadingProps) => {
         color={`${colorMode === 'dark' ? '#6dc849' : '#671ddf'}`}
         fontWeight={'500'}
         fontSize={'8xl'}
+        fontFamily={'system'}
         as={'h1'}
       >
         {selectedGenreHeading} {suffix}

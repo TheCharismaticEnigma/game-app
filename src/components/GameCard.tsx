@@ -16,7 +16,7 @@ const GameCard = (Props: CardProps) => {
   return (
     <>
       <Card
-        border={'0.5px solid black'}
+        boxShadow={'0.5px 0.5px 3px 0  black'}
         cursor={'pointer'}
         _hover={{ transform: 'scale(1.02)', transition: '300ms ease-in-out' }}
         borderRadius={'3xl'}
@@ -40,17 +40,19 @@ const GameCard = (Props: CardProps) => {
                 })}
               </Flex>
 
-              <Box
-                color={metaColor}
-                border={`1.5px solid ${metaColor}`}
-                borderRadius={'5px'}
-                padding={'0.1rem 0.5rem'}
-                textAlign={'center'}
-                fontWeight={'500'}
-                fontSize={'small'}
-              >
-                {metacritic}
-              </Box>
+              {metacritic > 40 && (
+                <Box
+                  color={metaColor}
+                  border={`1.5px solid ${metaColor}`}
+                  borderRadius={'5px'}
+                  padding={'0.1rem 0.5rem'}
+                  textAlign={'center'}
+                  fontWeight={'500'}
+                  fontSize={'small'}
+                >
+                  {metacritic}
+                </Box>
+              )}
             </HStack>
             <Flex
               gap={'2rem '}

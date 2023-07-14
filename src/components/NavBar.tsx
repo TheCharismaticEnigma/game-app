@@ -48,13 +48,17 @@ const NavBar = ({ onSearch }: Props) => {
             />
             <Input
               ref={inputRef}
-              variant={'filled'}
+              variant={'outline'}
               _placeholder={{
                 color: `${
                   colorMode === 'dark' ? 'rgba(255,255,255,0.7)' : 'black'
                 }`,
               }}
-              _hover={{ border: '0.5px solid white' }}
+              _hover={{
+                border: `0.5px solid ${
+                  colorMode === 'dark' ? 'white' : 'black'
+                }`,
+              }}
               fontSize={'2rem'}
               h={'4rem'}
               padding={'1px 5px 1px 5rem'}
