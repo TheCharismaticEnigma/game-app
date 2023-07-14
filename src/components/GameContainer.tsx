@@ -28,8 +28,7 @@ const GameContainer = (Props: GameContainerProps) => {
           })}
 
         {!isLoading &&
-          games.map((game, index) => {
-            if (index < 3) console.log(game);
+          games.map((game) => {
             return (
               <GridItem
                 border={'1px solid teal'}

@@ -1,30 +1,31 @@
 // Common parent that manages the State for both Sidebar and App Content.
 import { useState } from 'react';
 
-import {
-  Flex,
-  Box,
-  Spacer,
-  Heading,
-  Spinner,
-  Text,
-  useColorMode,
-} from '@chakra-ui/react';
+import { Flex, Box, Spacer, Spinner, Text } from '@chakra-ui/react';
 
+import AppHeading from './AppHeading';
 import SideBar from './SideBar';
 import GameContainer from './GameContainer';
+import Dropdowns from './Dropdowns';
 import { useGames } from '../hooks/useGames';
 import { Genre, useGenres } from '../hooks/useGenres';
-import Dropdowns from './Dropdowns';
+import { Platform } from '../hooks/usePlatforms';
+
+// Contains schema of all the query parameters used to fetch games.
+interface GameQuery {
+  selectedGenre: Genre | null; // selected Genre
+  selectedPlatform: Platform | null; // selected Platform
+}
 
 function AppContent() {
-  const { colorMode } = useColorMode();
+  const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);
+  const { selectedGenre } = gameQuery;
 
   const {
     data: games,
     error: imageError,
     isLoading: loadingImages,
-  } = useGames();
+  } = useGames(gameQuery);
 
   const {
     data: genres,
@@ -34,12 +35,6 @@ function AppContent() {
 
   const genreErrorisAxios = genreError?.name === 'AxiosError';
   const imageErrorisAxios = imageError?.name === 'AxiosError';
-
-  const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null);
-
-  const retrieveGenre = (genre: Genre) => {
-    setSelectedGenre(genre);
-  };
 
   // Sort the games with selected genre
 
@@ -64,7 +59,9 @@ function AppContent() {
             <SideBar
               genres={genres}
               selectedGenre={selectedGenre}
-              getSelectedGenre={retrieveGenre}
+              getSelectedGenre={(genre: Genre) => {
+                setGameQuery({ ...gameQuery, selectedGenre: genre });
+              }}
             />
           )}
         </Box>
@@ -73,16 +70,12 @@ function AppContent() {
 
         <Box w={'100%'} pr={'1rem'}>
           <Flex mb={'3rem'} gap={'2rem'} as={'div'} direction={'column'}>
-            <Heading
-              color={`${colorMode === 'dark' ? '#6dc849' : '#671ddf'}`}
-              fontWeight={'500'}
-              fontSize={'8xl'}
-              as={'h1'}
-            >
-              TOP PICKS
-            </Heading>
-
-            <Dropdowns />
+            <AppHeading selectedGenreHeading={selectedGenre?.name} />
+            <Dropdowns
+              selectedPlatform={(platform: string | null) =>
+                setGameQuery({ ...gameQuery, selectedPlatform: platform })
+              }
+            />
           </Flex>
 
           {imageErrorisAxios && (
@@ -105,4 +98,4 @@ function AppContent() {
   );
 }
 
-export default AppContent;
+export { type GameQuery, AppContent };

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
-import { AxiosError } from 'axios';
+import { AxiosError, AxiosRequestConfig } from 'axios';
 import HttpService from '../utils/RogueHttpService';
+import { GameQuery } from '../components/AppContent';
 
 interface FetchResponse<T> {
   status: number;
@@ -8,16 +9,26 @@ interface FetchResponse<T> {
   results: T[];
 }
 
-function useData<T>(path: string) {
+// When any of dependencies change, useData will be rerendered, and we'll get result again.
+// If no dependencies, then
+// The values of query parameters will be in dependency array too. (dynamically).
+
+function useData<T>(
+  path: string,
+  requestConfig?: AxiosRequestConfig,
+  dependencies?: any[]
+) {
   const [data, setData] = useState<T[]>([]);
   const [error, setError] = useState<AxiosError>();
   const [isLoading, setLoadingStatus] = useState(true);
+  const deps = dependencies ? [...dependencies] : [];
 
   useEffect(() => {
     const controller = new AbortController();
 
     HttpService.get<FetchResponse<T>>(path, {
       signal: controller.signal,
+      ...requestConfig,
     })
       .then((response) => {
         const { results } = response.data;
@@ -30,7 +41,7 @@ function useData<T>(path: string) {
       });
 
     return () => controller.abort();
-  }, []);
+  }, deps);
 
   return { data, error, isLoading };
 }

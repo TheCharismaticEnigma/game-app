@@ -1,12 +1,16 @@
 import { BiSolidGridAlt, BiSolidCard } from 'react-icons/bi';
 import { Flex, Select, Text, Icon, useColorMode } from '@chakra-ui/react';
-import usePlatforms from '../hooks/usePlatforms';
+import { Platform, usePlatforms } from '../hooks/usePlatforms';
+interface DropdownProps {
+  selectedPlatform: (selectedPlatform: Platform) => void;
+}
 
-const Dropdowns = () => {
+const Dropdowns = (Props: DropdownProps) => {
+  const { selectedPlatform } = Props;
+  const { data: platforms } = usePlatforms();
   const { colorMode } = useColorMode();
   const selectIconColor = `${colorMode === 'dark' ? 'teal.600' : '#671ddf'}`;
   const iconHoverColor = `${colorMode === 'dark' ? 'teal.400' : 'purple.800'}`;
-  const { data: platforms } = usePlatforms();
 
   return (
     <>
@@ -27,12 +31,12 @@ const Dropdowns = () => {
             width={'15rem'}
             textAlign={'left'}
           >
-            <option value="relevance">Relevance</option>
-            <option value="addeddate">Date added</option>
-            <option value="name">Name</option>
-            <option value="released">Release Date</option>
-            <option value="popularity">Popularity</option>
-            <option value="rating">Avg Rating</option>
+            <option value="-relevance">Relevance</option>
+            <option value="-added">Date added</option>
+            <option value="-name">Name</option>
+            <option value="-released">Release Date</option>
+            <option value="-metacritic">Popularity</option>
+            <option value="-rating">Avg Rating</option>
           </Select>
 
           <Select
@@ -41,9 +45,16 @@ const Dropdowns = () => {
             fontFamily={'cursive'}
             size={'lg'}
             borderColor={selectIconColor}
-            placeholder={`Platforms`}
             textAlign={'left'}
             width={'15rem'}
+            placeholder="Platforms"
+            onChange={(event) => {
+              const target = platforms.find(
+                (platform) => platform.slug === event.target?.value
+              );
+
+              if (target) selectedPlatform(target);
+            }}
           >
             {platforms.map((platform) => {
               const { id, name, slug } = platform;

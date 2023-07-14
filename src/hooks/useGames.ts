@@ -1,4 +1,6 @@
 import useData from './useData';
+import { GameQuery } from '../components/AppContent';
+
 interface Platform {
   id: number;
   name: string;
@@ -14,8 +16,17 @@ interface Game {
   rating_top: number;
 }
 
-// Finally block doesn't work in effect hook.
+// Query Object Pattern. Have all the queries in a single object instead of individual queries.
 
-const useGames = () => useData<Game>('/games');
+const useGames = (gameQuery: GameQuery) => {
+  const requestConfig = {
+    params: {
+      genres: gameQuery?.selectedGenre?.id,
+      parent_platforms: gameQuery?.selectedPlatform?.id,
+    },
+  };
+
+  return useData<Game>('/games', requestConfig, [gameQuery]);
+};
 
 export { useGames, type Game };

@@ -1,12 +1,4 @@
-import {
-  Image,
-  Stack,
-  Heading,
-  HStack,
-  Flex,
-  Badge,
-  Box,
-} from '@chakra-ui/react';
+import { Image, Stack, Heading, HStack, Flex, Box } from '@chakra-ui/react';
 import { Card, CardBody, CardFooter } from '@chakra-ui/react';
 import { Game } from '../hooks/useGames';
 import getPlatformIcon from '../utils/PlatformIcons';
