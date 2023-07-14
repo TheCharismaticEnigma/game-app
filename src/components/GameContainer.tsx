@@ -28,10 +28,11 @@ const GameContainer = (Props: GameContainerProps) => {
           })}
 
         {!isLoading &&
-          games.map((game) => {
+          games.map((game, index) => {
+            if (index < 10) console.log(game);
             return (
               <GridItem
-                border={'1px solid teal'}
+                height={'35rem'}
                 minW={'33rem'}
                 maxW={'75rem'}
                 as={'li'}

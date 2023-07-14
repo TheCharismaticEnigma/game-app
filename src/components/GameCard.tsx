@@ -1,14 +1,16 @@
 import { Image, Stack, Heading, HStack, Flex, Box } from '@chakra-ui/react';
 import { Card, CardBody, CardFooter } from '@chakra-ui/react';
 import { Game } from '../hooks/useGames';
-import getPlatformIcon from '../utils/PlatformIcons';
 import getCroppedImageUrl from '../utils/getCroppedImageUrl';
+import RatingIcon from '../utils/RatingIcons';
+import PlatformIcon from '../utils/PlatformIcons';
 interface CardProps {
   game: Game;
 }
 
 const GameCard = (Props: CardProps) => {
-  const { background_image, name, metacritic, parent_platforms } = Props.game;
+  const { background_image, name, metacritic, parent_platforms, rating_top } =
+    Props.game;
   const metaColor = `${metacritic > 75 ? '#6dc849' : 'yellow'}`;
 
   return (
@@ -33,8 +35,8 @@ const GameCard = (Props: CardProps) => {
           <Stack mt="4" spacing="5">
             <HStack pointerEvents={'none'} justifyContent={'space-between'}>
               <Flex alignItems={'center'} gap={'10px'}>
-                {parent_platforms.map(({ platform }) => {
-                  return getPlatformIcon(platform);
+                {parent_platforms.map(({ platform: { slug, id } }) => {
+                  return <PlatformIcon key={id} slug={slug} id={id} />;
                 })}
               </Flex>
 
@@ -50,19 +52,19 @@ const GameCard = (Props: CardProps) => {
                 {metacritic}
               </Box>
             </HStack>
-
-            <Heading
-              size="2xl"
-              lineHeight={'1.2'}
-              fontWeight={'600'}
-              width={'90%'}
+            <Flex
+              gap={'2rem '}
+              alignItems={'center '}
+              justifyContent={'space-between'}
+              width={'fit-content'}
             >
-              {name}
-            </Heading>
+              <Heading size="2xl" lineHeight={'1.2'} fontWeight={'600'}>
+                {name}
+              </Heading>
+              <RatingIcon rating={rating_top} />
+            </Flex>
           </Stack>
         </CardBody>
-
-        <CardFooter></CardFooter>
       </Card>
     </>
   );

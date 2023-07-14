@@ -18,13 +18,12 @@ const iconsMap: IconMap = {
   linux: FcLinux,
 };
 
-export default function getPlatformIcon({
-  slug,
-  id,
-}: {
-  id: number;
+interface Props {
   slug: string;
-}) {
+  id: number;
+}
+
+export default function PlatformIcon({ slug, id }: Props) {
   if (!iconsMap[slug]) return null;
 
   return <Icon key={id} boxSize={'1.7rem'} as={iconsMap[slug]} />;
