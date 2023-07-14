@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { AxiosError, AxiosRequestConfig } from 'axios';
 import HttpService from '../utils/RogueHttpService';
-import { GameQuery } from '../components/AppContent';
 
 interface FetchResponse<T> {
   status: number;

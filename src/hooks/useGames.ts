@@ -17,12 +17,16 @@ interface Game {
 }
 
 // Query Object Pattern. Have all the queries in a single object instead of individual queries.
+// When query param values are nullish, they aren't sent.
 
 const useGames = (gameQuery: GameQuery) => {
+  if (gameQuery.searchQuery === '') console.log('DONE');
+
   const requestConfig = {
     params: {
       genres: gameQuery?.selectedGenre?.id,
       parent_platforms: gameQuery?.selectedPlatform?.id,
+      search: gameQuery?.searchQuery,
     },
   };
 

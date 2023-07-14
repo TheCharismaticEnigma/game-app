@@ -1,11 +1,17 @@
+import { useRef } from 'react';
 import { Box, Flex, Spacer, Image } from '@chakra-ui/react';
 import { FormControl, FormLabel, Input, Switch } from '@chakra-ui/react';
 import { SearchIcon } from '@chakra-ui/icons';
 import { useColorMode } from '@chakra-ui/react';
 
 import logo from '../assets/logo.webp';
+interface Props {
+  onSearch: (query: string) => void;
+}
 
-const NavBar = () => {
+const NavBar = ({ onSearch }: Props) => {
+  const inputRef = useRef<HTMLInputElement>(null);
+
   const { colorMode, toggleColorMode } = useColorMode();
 
   return (
@@ -23,31 +29,44 @@ const NavBar = () => {
         <Spacer />
 
         <FormControl>
-          <SearchIcon
-            _hover={{ color: 'black ' }}
-            boxSize={8}
-            position={'absolute'}
-            transform={'translate(50%,50%)'}
-          />
-          <Input
-            variant={'filled'}
-            _placeholder={{
-              color: `${
-                colorMode === 'dark' ? 'rgba(255,255,255,0.7)' : 'black'
-              }`,
+          <form
+            onSubmit={(event) => {
+              event.preventDefault();
+              const { current } = inputRef;
+
+              if (current && current.value.length > 0) {
+                onSearch(current.value);
+                current.value = '';
+              }
             }}
-            _hover={{ border: '0.5px solid white' }}
-            fontSize={'2rem'}
-            h={'4rem'}
-            padding={'1px 5px 1px 5rem'}
-            borderRadius={'2.5rem '}
-            border={`0.5px solid ${
-              colorMode === 'light' ? 'black' : 'rgba(255,255,255,0.5)'
-            }`}
-            type="text"
-            placeholder={`Search from 851,081 games`}
-            autoCorrect="off"
-          ></Input>
+          >
+            <SearchIcon
+              _hover={{ color: 'black ' }}
+              boxSize={8}
+              position={'absolute'}
+              transform={'translate(50%,50%)'}
+            />
+            <Input
+              ref={inputRef}
+              variant={'filled'}
+              _placeholder={{
+                color: `${
+                  colorMode === 'dark' ? 'rgba(255,255,255,0.7)' : 'black'
+                }`,
+              }}
+              _hover={{ border: '0.5px solid white' }}
+              fontSize={'2rem'}
+              h={'4rem'}
+              padding={'1px 5px 1px 5rem'}
+              borderRadius={'2.5rem '}
+              border={`0.5px solid ${
+                colorMode === 'light' ? 'black' : 'rgba(255,255,255,0.5)'
+              }`}
+              type="text"
+              placeholder={`Search from 851,081 games`}
+              autoCorrect="off"
+            ></Input>
+          </form>
         </FormControl>
         <Spacer />
 

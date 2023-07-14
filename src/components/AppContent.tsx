@@ -3,6 +3,7 @@ import { useState } from 'react';
 
 import { Flex, Box, Spacer, Spinner, Text } from '@chakra-ui/react';
 
+import NavBar from './NavBar';
 import AppHeading from './AppHeading';
 import SideBar from './SideBar';
 import GameContainer from './GameContainer';
@@ -15,10 +16,12 @@ import { Platform } from '../hooks/usePlatforms';
 interface GameQuery {
   selectedGenre: Genre | null; // selected Genre
   selectedPlatform: Platform | null; // selected Platform
+  searchQuery: string;
 }
 
 function AppContent() {
   const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);
+
   const { selectedGenre } = gameQuery;
 
   const {
@@ -40,6 +43,12 @@ function AppContent() {
 
   return (
     <>
+      <NavBar
+        onSearch={(searchQuery: string) => {
+          setGameQuery({ ...gameQuery, searchQuery });
+        }}
+      />
+
       <Flex pt={'1rem'} gap={'0.5rem'} as="section" minH={'80vh'}>
         <Box width={'min(100%, 22rem)'}>
           {loadingGenres && (
@@ -72,7 +81,7 @@ function AppContent() {
           <Flex mb={'3rem'} gap={'2rem'} as={'div'} direction={'column'}>
             <AppHeading selectedGenreHeading={selectedGenre?.name} />
             <Dropdowns
-              selectedPlatform={(platform: string | null) =>
+              selectedPlatform={(platform: Platform | null) =>
                 setGameQuery({ ...gameQuery, selectedPlatform: platform })
               }
             />
