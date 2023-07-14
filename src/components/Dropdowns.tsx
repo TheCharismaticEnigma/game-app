@@ -2,11 +2,12 @@ import { BiSolidGridAlt, BiSolidCard } from 'react-icons/bi';
 import { Flex, Select, Text, Icon, useColorMode } from '@chakra-ui/react';
 import { Platform, usePlatforms } from '../hooks/usePlatforms';
 interface DropdownProps {
-  selectedPlatform: (selectedPlatform: Platform) => void;
+  selectPlatform: (selectedPlatform: Platform) => void;
+  selectOrdering: (selectedOrdering: string | null) => void;
 }
 
 const Dropdowns = (Props: DropdownProps) => {
-  const { selectedPlatform } = Props;
+  const { selectPlatform, selectOrdering } = Props;
   const { data: platforms } = usePlatforms();
   const { colorMode } = useColorMode();
   const selectIconColor = `${colorMode === 'dark' ? 'teal.600' : '#671ddf'}`;
@@ -30,8 +31,10 @@ const Dropdowns = (Props: DropdownProps) => {
             placeholder={`Order by `}
             width={'15rem'}
             textAlign={'left'}
+            onChange={(event) => {
+              selectOrdering(event.target.value);
+            }}
           >
-            <option value="-relevance">Relevance</option>
             <option value="-added">Date added</option>
             <option value="-name">Name</option>
             <option value="-released">Release Date</option>
@@ -53,7 +56,7 @@ const Dropdowns = (Props: DropdownProps) => {
                 (platform) => platform.slug === event.target?.value
               );
 
-              if (target) selectedPlatform(target);
+              if (target) selectPlatform(target);
             }}
           >
             {platforms.map((platform) => {

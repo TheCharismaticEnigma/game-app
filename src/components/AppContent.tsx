@@ -16,7 +16,8 @@ import { Platform } from '../hooks/usePlatforms';
 interface GameQuery {
   selectedGenre: Genre | null; // selected Genre
   selectedPlatform: Platform | null; // selected Platform
-  searchQuery: string;
+  searchQuery: string | null;
+  orderBy: string | null;
 }
 
 function AppContent() {
@@ -81,9 +82,12 @@ function AppContent() {
           <Flex mb={'3rem'} gap={'2rem'} as={'div'} direction={'column'}>
             <AppHeading selectedGenreHeading={selectedGenre?.name} />
             <Dropdowns
-              selectedPlatform={(platform: Platform | null) =>
+              selectPlatform={(platform: Platform | null) =>
                 setGameQuery({ ...gameQuery, selectedPlatform: platform })
               }
+              selectOrdering={(ordering: string | null) => {
+                setGameQuery({ ...gameQuery, orderBy: ordering });
+              }}
             />
           </Flex>
 
