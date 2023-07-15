@@ -19,6 +19,8 @@ interface GameQuery {
   selectedPlatform: Platform | null; // selected Platform
   searchQuery: string | null;
   orderBy: string | null;
+  page?: number;
+  page_size?: number;
 }
 
 function AppContent() {
@@ -44,6 +46,7 @@ function AppContent() {
   return (
     <>
       <Grid
+        position={'relative'}
         margin={'0 auto '}
         width={'min(100%, 1250px)'}
         gridTemplateColumns={{
@@ -104,7 +107,15 @@ function AppContent() {
           </Box>
         </GridItem>
 
-        <GridItem area={'main'}>
+        <GridItem
+          area={'main'}
+          height={{
+            base: 'fit-content',
+            md: '110vh',
+          }}
+          overflow={'auto'}
+          scrollBehavior={'smooth'}
+        >
           <Box w={'100%'} pr={'1rem'}>
             <Flex mb={'3rem'} gap={'2rem'} as={'div'} direction={'column'}>
               <AppHeading selectedGenreHeading={selectedGenre?.name} />

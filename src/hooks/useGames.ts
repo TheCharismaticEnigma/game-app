@@ -26,6 +26,8 @@ const useGames = (gameQuery: GameQuery) => {
       parent_platforms: gameQuery?.selectedPlatform?.id,
       search: gameQuery?.searchQuery,
       ordering: gameQuery?.orderBy,
+      page: gameQuery?.page ?? 1,
+      page_size: 20,
     },
   };
 
