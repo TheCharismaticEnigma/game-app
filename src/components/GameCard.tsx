@@ -1,5 +1,5 @@
 import { Image, Stack, Heading, HStack, Flex, Box } from '@chakra-ui/react';
-import { Card, CardBody, CardFooter } from '@chakra-ui/react';
+import { Card, CardBody } from '@chakra-ui/react';
 import { Game } from '../hooks/useGames';
 import getCroppedImageUrl from '../utils/getCroppedImageUrl';
 import RatingIcon from '../utils/RatingIcons';
@@ -28,7 +28,7 @@ const GameCard = (Props: CardProps) => {
           src={getCroppedImageUrl(background_image)}
           h={'55%'}
           objectFit={'cover'}
-          alt="Green double couch with wooden legs"
+          alt={`${name} game image`}
           borderRadius="lg"
         />
         <CardBody>
@@ -60,7 +60,11 @@ const GameCard = (Props: CardProps) => {
               justifyContent={'space-between'}
               width={'fit-content'}
             >
-              <Heading size="2xl" lineHeight={'1.2'} fontWeight={'600'}>
+              <Heading
+                size={{ base: '2xl', md: 'xl', lg: '2xl' }}
+                lineHeight={'1.2'}
+                fontWeight={'600'}
+              >
                 {name}
               </Heading>
               <RatingIcon rating={rating_top} />

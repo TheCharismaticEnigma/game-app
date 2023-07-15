@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { Box, Flex, Spacer, Image } from '@chakra-ui/react';
+import { Box, Flex, Spacer, Image, Show } from '@chakra-ui/react';
 import { FormControl, FormLabel, Input, Switch } from '@chakra-ui/react';
 import { SearchIcon } from '@chakra-ui/icons';
 import { useColorMode } from '@chakra-ui/react';
@@ -16,7 +16,13 @@ const NavBar = ({ onSearch }: Props) => {
 
   return (
     <>
-      <Flex as="nav" gap={'1rem'} padding={'1rem '} alignItems={'center'}>
+      <Flex
+        as="nav"
+        width={'100%'}
+        gap={'1rem'}
+        padding={'1rem '}
+        alignItems={'center'}
+      >
         <Box h={'5rem'} w={'6rem'}>
           <Image
             h={'100%'}
@@ -59,7 +65,7 @@ const NavBar = ({ onSearch }: Props) => {
                   colorMode === 'dark' ? 'white' : 'black'
                 }`,
               }}
-              fontSize={'2rem'}
+              fontSize={{ base: '1rem', sm: '2rem' }}
               h={'4rem'}
               padding={'1px 5px 1px 5rem'}
               borderRadius={'2.5rem '}
@@ -74,25 +80,28 @@ const NavBar = ({ onSearch }: Props) => {
         </FormControl>
         <Spacer />
 
-        <Flex minW={'fit-content'} gap={'1rem'} alignItems={'center '}>
-          <Switch
-            onChange={toggleColorMode}
-            isChecked={colorMode === 'dark'}
-            size={'lg'}
-            colorScheme="teal"
-            id="toggle-mode"
-          />
-
+        <Show above="md">
           <FormLabel
             fontFamily={'cursive'}
             fontStyle={'italic'}
             fontSize={'2rem'}
             htmlFor="toggle-mode"
+            whiteSpace={'nowrap'}
             mb="0"
           >
             Dark Mode
           </FormLabel>
-        </Flex>
+
+          <Flex minW={'fit-content'} gap={'1rem'} alignItems={'center '}>
+            <Switch
+              onChange={toggleColorMode}
+              isChecked={colorMode === 'dark'}
+              size={'lg'}
+              colorScheme="teal"
+              id="toggle-mode"
+            />
+          </Flex>
+        </Show>
       </Flex>
     </>
   );

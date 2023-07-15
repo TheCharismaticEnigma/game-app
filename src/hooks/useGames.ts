@@ -20,8 +20,6 @@ interface Game {
 // When query param values are nullish, they aren't sent.
 
 const useGames = (gameQuery: GameQuery) => {
-  if (gameQuery.searchQuery === '') console.log('DONE');
-
   const requestConfig = {
     params: {
       genres: gameQuery?.selectedGenre?.id,

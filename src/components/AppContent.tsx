@@ -2,6 +2,7 @@
 import { useState } from 'react';
 
 import { Flex, Box, Spacer, Spinner, Text } from '@chakra-ui/react';
+import { Grid, GridItem } from '@chakra-ui/react';
 
 import NavBar from './NavBar';
 import AppHeading from './AppHeading';
@@ -40,73 +41,100 @@ function AppContent() {
   const genreErrorisAxios = genreError?.name === 'AxiosError';
   const imageErrorisAxios = imageError?.name === 'AxiosError';
 
-  // Sort the games with selected genre
-
   return (
     <>
-      <NavBar
-        onSearch={(searchQuery: string) => {
-          setGameQuery({ ...gameQuery, searchQuery });
+      <Grid
+        margin={'0 auto '}
+        width={'min(100%, 1250px)'}
+        gridTemplateColumns={{
+          base: '1fr',
+          md: '22rem 1fr  ',
         }}
-      />
+        justifyItems={{
+          base: 'center',
+          md: 'stretch',
+        }}
+        templateAreas={{
+          base: `"nav" 
+                 "main"`,
 
-      <Flex pt={'1rem'} gap={'0.5rem'} as="section" minH={'80vh'}>
-        <Box width={'min(100%, 22rem)'}>
-          {loadingGenres && (
-            <Spinner
-              thickness="5px"
-              speed="0.55s"
-              emptyColor="gray.200"
-              color="red.500"
-              size="xl"
-              margin={'40%'}
-            />
-          )}
+          md: `"nav   nav"
+               "aside main" `,
+        }}
+      >
+        <GridItem area={'nav'}>
+          <NavBar
+            onSearch={(searchQuery: string) => {
+              setGameQuery({ ...gameQuery, searchQuery });
+            }}
+          />
+        </GridItem>
 
-          {genreErrorisAxios && null}
+        <GridItem
+          area={'aside'}
+          width={'min(100%, 22rem)'}
+          display={{
+            base: 'none',
+            md: 'block',
+          }}
+        >
+          <Box>
+            {loadingGenres && (
+              <Spinner
+                thickness="5px"
+                speed="0.55s"
+                emptyColor="gray.200"
+                color="red.500"
+                size="xl"
+                margin={'40%'}
+              />
+            )}
 
-          {!genreErrorisAxios && (
-            <SideBar
-              genres={genres}
-              selectedGenre={selectedGenre}
-              getSelectedGenre={(genre: Genre) => {
-                setGameQuery({ ...gameQuery, selectedGenre: genre });
-              }}
-            />
-          )}
-        </Box>
+            {genreErrorisAxios && null}
 
-        <Spacer />
+            {!genreErrorisAxios && (
+              <SideBar
+                genres={genres}
+                selectedGenre={selectedGenre}
+                getSelectedGenre={(genre: Genre) => {
+                  setGameQuery({ ...gameQuery, selectedGenre: genre });
+                }}
+              />
+            )}
+          </Box>
+        </GridItem>
 
-        <Box w={'100%'} pr={'1rem'}>
-          <Flex mb={'3rem'} gap={'2rem'} as={'div'} direction={'column'}>
-            <AppHeading selectedGenreHeading={selectedGenre?.name} />
-            <Dropdowns
-              selectPlatform={(platform: Platform | null) =>
-                setGameQuery({ ...gameQuery, selectedPlatform: platform })
-              }
-              selectOrdering={(ordering: string | null) => {
-                setGameQuery({ ...gameQuery, orderBy: ordering });
-              }}
-            />
-          </Flex>
+        <GridItem area={'main'}>
+          <Box w={'100%'} pr={'1rem'}>
+            <Flex mb={'3rem'} gap={'2rem'} as={'div'} direction={'column'}>
+              <AppHeading selectedGenreHeading={selectedGenre?.name} />
+              <Dropdowns
+                selectPlatform={(platform: Platform | null) =>
+                  setGameQuery({ ...gameQuery, selectedPlatform: platform })
+                }
+                selectOrdering={(ordering: string | null) => {
+                  setGameQuery({ ...gameQuery, orderBy: ordering });
+                }}
+              />
+            </Flex>
 
-          {imageErrorisAxios && (
-            <Text
-              color={'red.400'}
-              fontStyle={'italic'}
-              textAlign={'center'}
-              fontSize={'6xl'}
-            >
-              {imageError?.message.toUpperCase()}
-            </Text>
-          )}
+            {imageErrorisAxios && (
+              <Text
+                color={'red.400'}
+                fontStyle={'italic'}
+                textAlign={'center'}
+                fontSize={'6xl'}
+              >
+                {imageError?.message.toUpperCase()}
+              </Text>
+            )}
 
-          {!imageErrorisAxios && (
-            <GameContainer isLoading={loadingImages} games={games} />
-          )}
-        </Box>
-      </Flex>
+            {!imageErrorisAxios && (
+              <GameContainer isLoading={loadingImages} games={games} />
+            )}
+          </Box>
+        </GridItem>
+      </Grid>
     </>
   );
 }

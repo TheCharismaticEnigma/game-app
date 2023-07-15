@@ -2,20 +2,18 @@
   /* Now 1rem = 10px instead of 16px  */
   /* font-size: 10px; */
   font-size: 10px;
-  display: grid;
-  place-items: center;
 }
 
 *,
 *::before,
 *::after {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
 body {
-  width: min(100%, 1280px);
   overflow-x: hidden;
-  margin: 0 auto;
 }
 
 ul {

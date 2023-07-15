@@ -9,17 +9,21 @@ interface GameContainerProps {
 
 const GameContainer = (Props: GameContainerProps) => {
   const { isLoading, games } = Props;
+  const gridView = { width: 'minmax(30rem,32rem)', height: '35rem' };
+  // const cardView = { width: '75rem', height: '40rem' };
 
   const skeletons = [1, 2, 3, 4, 5, 6];
 
   return (
     <>
       <Grid
-        width={'auto'}
         as={'ul'}
         padding={'0 0.5rem '}
-        templateColumns={'repeat(3, 1fr)'}
-        justifyItems={'center'}
+        gridTemplateColumns={{
+          base: 'repeat(1,1fr)',
+          md: 'repeat(2,1fr)',
+          lg: 'repeat(3,1fr)',
+        }}
         gap={'2rem'}
       >
         {isLoading &&
@@ -28,14 +32,12 @@ const GameContainer = (Props: GameContainerProps) => {
           })}
 
         {!isLoading &&
-          games.map((game, index) => {
-            if (index < 10) console.log(game);
+          games.map((game) => {
             return (
               <GridItem
-                height={'35rem'}
-                minW={'33rem'}
-                maxW={'75rem'}
                 as={'li'}
+                width={gridView.width}
+                height={gridView.height}
                 key={game.id}
               >
                 <GameCard game={game} />

@@ -12,7 +12,7 @@ const GenreList = ({ genre, isSelectedGenre, updateGenre }: Props) => {
   const { image_background, name, slug } = genre;
 
   const fontSize = `${isSelectedGenre ? '1.8' : '1.7'}rem`;
-  const color = `${isSelectedGenre ? 'purple' : 'white'}`;
+  const color = `${isSelectedGenre ? '#671DDF' : 'white'}`;
 
   const buttonRef = useRef<HTMLButtonElement>(null);
 

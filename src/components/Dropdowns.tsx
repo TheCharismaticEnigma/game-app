@@ -1,5 +1,13 @@
 import { BiSolidGridAlt, BiSolidCard } from 'react-icons/bi';
-import { Flex, Select, Text, Icon, useColorMode } from '@chakra-ui/react';
+import {
+  Flex,
+  Select,
+  Text,
+  Icon,
+  useColorMode,
+  Show,
+  HStack,
+} from '@chakra-ui/react';
 import { Platform, usePlatforms } from '../hooks/usePlatforms';
 interface DropdownProps {
   selectPlatform: (selectedPlatform: Platform) => void;
@@ -10,7 +18,7 @@ const Dropdowns = (Props: DropdownProps) => {
   const { selectPlatform, selectOrdering } = Props;
   const { data: platforms } = usePlatforms();
   const { colorMode } = useColorMode();
-  const selectIconColor = `${colorMode === 'dark' ? 'teal.600' : '#671ddf'}`;
+  const selectIconColor = `${colorMode === 'dark' ? '#6dc849' : '#671DDF'}`;
   const iconHoverColor = `${colorMode === 'dark' ? 'teal.400' : 'purple.800'}`;
 
   return (
@@ -71,30 +79,36 @@ const Dropdowns = (Props: DropdownProps) => {
           </Select>
         </Flex>
 
-        <Flex alignItems={'center'} gap={'1rem '}>
-          <Text fontFamily={'cursive'} fontSize={'1.5rem'} fontStyle={'italic'}>
-            Display Options:{' '}
-          </Text>
-
-          <Icon
-            color={selectIconColor}
-            _hover={{ color: `${iconHoverColor}` }}
-            cursor={'pointer'}
-            onClick={() => console.log('clicked')}
-            as={BiSolidCard}
-            boxSize={'4rem'}
-            focusable={'true'}
-          ></Icon>
-
-          <Icon
-            cursor={'pointer'}
-            focusable={'true'}
-            as={BiSolidGridAlt}
-            color={selectIconColor}
-            _hover={{ color: `${iconHoverColor}` }}
-            boxSize={'4rem'}
-          ></Icon>
-        </Flex>
+        <Show above="md">
+          <Flex alignItems={'center'} gap={'2rem '}>
+            <Text
+              fontFamily={'cursive'}
+              fontSize={'1.5rem'}
+              fontStyle={'italic'}
+            >
+              Display Options:{' '}
+            </Text>
+            <HStack spacing={'1rem'}>
+              <Icon
+                color={selectIconColor}
+                _hover={{ color: `${iconHoverColor}` }}
+                cursor={'pointer'}
+                onClick={() => console.log('clicked')}
+                as={BiSolidCard}
+                boxSize={'4rem'}
+                focusable={'true'}
+              ></Icon>
+              <Icon
+                cursor={'pointer'}
+                focusable={'true'}
+                as={BiSolidGridAlt}
+                color={selectIconColor}
+                _hover={{ color: `${iconHoverColor}` }}
+                boxSize={'4rem'}
+              ></Icon>
+            </HStack>
+          </Flex>
+        </Show>
       </Flex>
     </>
   );
