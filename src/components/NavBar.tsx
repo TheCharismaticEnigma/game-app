@@ -97,7 +97,7 @@ const NavBar = ({ onSearch }: Props) => {
               onChange={toggleColorMode}
               isChecked={colorMode === 'dark'}
               size={'lg'}
-              colorScheme="teal"
+              colorScheme="green"
               id="toggle-mode"
             />
           </Flex>
