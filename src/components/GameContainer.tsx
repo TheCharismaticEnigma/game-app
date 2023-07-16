@@ -10,7 +10,7 @@ interface GameContainerProps {
 }
 
 const GameContainer = (Props: GameContainerProps) => {
-  const { isLoading, games, fetchNextGamesPage } = Props;
+  const { isLoading, games } = Props;
   const gridView = { width: 'minmax(30rem,32rem)', height: '35rem' };
   const skeletons = [1, 2, 3, 4, 5, 6];
 

@@ -1,5 +1,5 @@
 // Common parent that manages the State for both Sidebar and App Content.
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 
 import { Flex, Box, Spinner, Text } from '@chakra-ui/react';
 import { Grid, GridItem } from '@chakra-ui/react';
