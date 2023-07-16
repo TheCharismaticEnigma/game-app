@@ -1,7 +1,7 @@
 // Common parent that manages the State for both Sidebar and App Content.
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
-import { Flex, Box, Spacer, Spinner, Text } from '@chakra-ui/react';
+import { Flex, Box, Spinner, Text } from '@chakra-ui/react';
 import { Grid, GridItem } from '@chakra-ui/react';
 
 import NavBar from './NavBar';
@@ -26,7 +26,7 @@ interface GameQuery {
 function AppContent() {
   const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);
 
-  const { selectedGenre } = gameQuery;
+  const { selectedGenre, page = 0 } = gameQuery;
 
   const {
     data: games,
@@ -107,15 +107,7 @@ function AppContent() {
           </Box>
         </GridItem>
 
-        <GridItem
-          area={'main'}
-          height={{
-            base: 'fit-content',
-            md: '110vh',
-          }}
-          overflow={'auto'}
-          scrollBehavior={'smooth'}
-        >
+        <GridItem area={'main'} overflow={'auto'} scrollBehavior={'smooth'}>
           <Box w={'100%'} pr={'1rem'}>
             <Flex mb={'3rem'} gap={'2rem'} as={'div'} direction={'column'}>
               <AppHeading selectedGenreHeading={selectedGenre?.name} />
@@ -141,7 +133,16 @@ function AppContent() {
             )}
 
             {!imageErrorisAxios && (
-              <GameContainer isLoading={loadingImages} games={games} />
+              <GameContainer
+                isLoading={loadingImages}
+                games={games}
+                fetchNextGamesPage={() => {
+                  setGameQuery({
+                    ...gameQuery,
+                    page: page + 1,
+                  });
+                }}
+              />
             )}
           </Box>
         </GridItem>

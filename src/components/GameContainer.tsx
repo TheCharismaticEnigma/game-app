@@ -2,21 +2,22 @@ import { Grid, GridItem } from '@chakra-ui/react';
 import GameCard from './GameCard';
 import { Game } from '../hooks/useGames';
 import CardSkeleton from '../utils/CardSkeleton';
+
 interface GameContainerProps {
   isLoading: boolean;
   games: Game[];
+  fetchNextGamesPage: () => void;
 }
 
 const GameContainer = (Props: GameContainerProps) => {
-  const { isLoading, games } = Props;
+  const { isLoading, games, fetchNextGamesPage } = Props;
   const gridView = { width: 'minmax(30rem,32rem)', height: '35rem' };
-  // const cardView = { width: '75rem', height: '40rem' };
-
   const skeletons = [1, 2, 3, 4, 5, 6];
 
   return (
     <>
       <Grid
+        border={'1x solid green'}
         as={'ul'}
         padding={'0 0.5rem '}
         gridTemplateColumns={{
@@ -25,6 +26,7 @@ const GameContainer = (Props: GameContainerProps) => {
           lg: 'repeat(3,1fr)',
         }}
         gap={'2rem'}
+        overflow={'hidden'}
       >
         {isLoading &&
           skeletons.map((skeleton) => {
