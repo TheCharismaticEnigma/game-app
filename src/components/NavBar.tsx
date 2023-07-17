@@ -42,7 +42,6 @@ const NavBar = ({ onSearch }: Props) => {
 
               if (current && current.value.length > 0) {
                 onSearch(current.value);
-                current.value = '';
               }
             }}
           >
