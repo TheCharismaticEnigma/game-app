@@ -12,10 +12,11 @@ import { Platform, usePlatforms } from '../hooks/usePlatforms';
 interface DropdownProps {
   selectPlatform: (selectedPlatform: Platform) => void;
   selectOrdering: (selectedOrdering: string | null) => void;
+  setDisplay: (gridDisplayStatus: boolean) => void;
 }
 
 const Dropdowns = (Props: DropdownProps) => {
-  const { selectPlatform, selectOrdering } = Props;
+  const { selectPlatform, selectOrdering, setDisplay } = Props;
   const { data: platforms } = usePlatforms();
   const { colorMode } = useColorMode();
   const selectIconColor = `${colorMode === 'dark' ? '#6dc849' : '#671DDF'}`;
@@ -90,15 +91,17 @@ const Dropdowns = (Props: DropdownProps) => {
             </Text>
             <HStack spacing={'1rem'}>
               <Icon
+                onClick={() => setDisplay(false)}
                 color={selectIconColor}
                 _hover={{ color: `${iconHoverColor}` }}
                 cursor={'pointer'}
-                onClick={() => console.log('clicked')}
                 as={BiSolidCard}
                 boxSize={'4rem'}
                 focusable={'true'}
               ></Icon>
+
               <Icon
+                onClick={() => setDisplay(true)}
                 cursor={'pointer'}
                 focusable={'true'}
                 as={BiSolidGridAlt}

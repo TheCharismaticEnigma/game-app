@@ -1,7 +1,7 @@
 // Common parent that manages the State for both Sidebar and App Content.
 import { useState } from 'react';
 
-import { Flex, Box, Spinner, Text } from '@chakra-ui/react';
+import { Flex, Box, Spinner, Text, grid } from '@chakra-ui/react';
 import { Grid, GridItem } from '@chakra-ui/react';
 
 import NavBar from './NavBar';
@@ -25,6 +25,7 @@ interface GameQuery {
 
 function AppContent() {
   const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);
+  const [isGridDisplay, setGridDisplayStatus] = useState(true);
 
   const { selectedGenre, page = 0 } = gameQuery;
 
@@ -118,6 +119,9 @@ function AppContent() {
                 selectOrdering={(ordering: string | null) => {
                   setGameQuery({ ...gameQuery, orderBy: ordering });
                 }}
+                setDisplay={(gridDisplayActive: boolean) => {
+                  setGridDisplayStatus(gridDisplayActive);
+                }}
               />
             </Flex>
 
@@ -134,6 +138,7 @@ function AppContent() {
 
             {!imageErrorisAxios && (
               <GameContainer
+                gridDisplayIsActive={isGridDisplay}
                 isLoading={loadingImages}
                 games={games}
                 fetchNextGamesPage={() => {

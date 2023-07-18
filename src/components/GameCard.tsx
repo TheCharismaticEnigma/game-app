@@ -6,6 +6,7 @@ import RatingIcon from '../utils/RatingIcons';
 import PlatformIcon from '../utils/PlatformIcons';
 interface CardProps {
   game: Game;
+  imageHeight: string;
 }
 
 const GameCard = (Props: CardProps) => {
@@ -26,7 +27,7 @@ const GameCard = (Props: CardProps) => {
       >
         <Image
           src={getCroppedImageUrl(background_image)}
-          h={'55%'}
+          h={Props.imageHeight}
           objectFit={'cover'}
           alt={`${name} game image`}
           borderRadius="lg"
