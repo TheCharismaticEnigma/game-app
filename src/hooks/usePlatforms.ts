@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import useData, { FetchResponse } from './useData';
+import { FetchResponse } from './useData';
 import HttpService from '../utils/RogueHttpService';
 
 interface Platform {
