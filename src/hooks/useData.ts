@@ -2,9 +2,10 @@ import { useState, useEffect } from 'react';
 import { AxiosError, AxiosRequestConfig } from 'axios';
 import HttpService from '../utils/RogueHttpService';
 
-interface FetchResponse<T> {
+export interface FetchResponse<T> {
   status: number;
   statusText: string;
+  count: number;
   results: T[];
 }
 

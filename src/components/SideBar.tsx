@@ -3,7 +3,7 @@ import { Genre } from '../hooks/useGenres';
 import GenreList from './GenreList';
 
 export interface SideBarProps {
-  genres: Genre[];
+  genres: Genre[] | undefined;
   selectedGenre: Genre | null;
   getSelectedGenre: (genre: Genre) => void;
 }
@@ -20,7 +20,7 @@ const SideBar = (Props: SideBarProps) => {
         gap={'1rem '}
       >
         <List width={'85%'}>
-          {genres.map((genre) => {
+          {genres?.map((genre) => {
             return (
               <ListItem key={genre.id}>
                 <GenreList

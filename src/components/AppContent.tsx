@@ -34,11 +34,9 @@ function AppContent() {
     isLoading: loadingImages,
   } = useGames(gameQuery);
 
-  const {
-    data: genres,
-    error: genreError,
-    isLoading: loadingGenres,
-  } = useGenres();
+  const { data, error: genreError, isLoading: loadingGenres } = useGenres();
+
+  const genres = data?.results;
 
   const genreErrorisAxios = genreError?.name === 'AxiosError';
   const imageErrorisAxios = imageError?.name === 'AxiosError';
