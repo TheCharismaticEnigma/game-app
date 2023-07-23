@@ -17,7 +17,8 @@ interface DropdownProps {
 
 const Dropdowns = (Props: DropdownProps) => {
   const { selectPlatform, selectOrdering, setDisplay } = Props;
-  const { data: platforms } = usePlatforms();
+  const { data } = usePlatforms();
+  const platforms = data?.results;
   const { colorMode } = useColorMode();
   const selectIconColor = `${colorMode === 'dark' ? '#6dc849' : '#671DDF'}`;
   const iconHoverColor = `${colorMode === 'dark' ? 'teal.400' : 'purple.800'}`;
@@ -61,14 +62,14 @@ const Dropdowns = (Props: DropdownProps) => {
             width={'15rem'}
             placeholder="Platforms"
             onChange={(event) => {
-              const target = platforms.find(
+              const target = platforms?.find(
                 (platform) => platform.slug === event.target?.value
               );
 
               if (target) selectPlatform(target);
             }}
           >
-            {platforms.map((platform) => {
+            {platforms?.map((platform) => {
               const { id, name, slug } = platform;
 
               return (

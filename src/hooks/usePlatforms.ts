@@ -1,4 +1,6 @@
-import useData from './useData';
+import { useQuery } from '@tanstack/react-query';
+import useData, { FetchResponse } from './useData';
+import HttpService from '../utils/RogueHttpService';
 
 interface Platform {
   id: number;
@@ -12,7 +14,19 @@ interface Platform {
   }[];
 }
 
-const usePlatforms = () => useData<Platform>('/platforms/lists/parents');
+// const usePlatforms = () => useData<Platform>('/platforms/lists/parents');
+// Everytime query key changes, data is refetched.
+
+const usePlatforms = () => {
+  return useQuery({
+    queryKey: ['platforms'],
+    queryFn: () =>
+      HttpService.get<FetchResponse<Platform>>('/platforms/lists/parents').then(
+        (r) => r.data
+      ),
+    staleTime: 24 * 60 * 60 * 1000,
+  });
+};
 
 export default usePlatforms;
 export { usePlatforms, type Platform };
