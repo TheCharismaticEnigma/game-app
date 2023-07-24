@@ -5,7 +5,7 @@ import CardSkeleton from '../utils/CardSkeleton';
 
 interface GameContainerProps {
   isLoading: boolean;
-  games: Game[];
+  games: Game[] | undefined;
   fetchNextGamesPage: () => void;
   gridDisplayIsActive: boolean;
 }
@@ -57,7 +57,7 @@ const GameContainer = (Props: GameContainerProps) => {
           })}
 
         {!isLoading &&
-          games.map((game) => {
+          games?.map((game) => {
             return (
               <GridItem
                 as={'li'}

@@ -1,18 +1,12 @@
-import { useState, useEffect } from 'react';
-import { AxiosError, AxiosRequestConfig } from 'axios';
-import HttpService from '../utils/RogueHttpService';
+// import { useState, useEffect } from 'react';
+// import { AxiosError, AxiosRequestConfig } from 'axios';
+// import HttpService from '../utils/RogueHttpService';
 
-export interface FetchResponse<T> {
-  status: number;
-  statusText: string;
-  count: number;
-  results: T[];
-}
+// Custom Data Hook is inutile right now.
+// Before removing a building block => Analyze the cost/impact of removal.
+// HOW? Finding all references to it.
 
-// When any of dependencies change, useData will be rerendered, and we'll get result again.
-// If no dependencies, then
-// The values of query parameters will be in dependency array too. (dynamically).
-
+/*
 function useData<T>(
   path: string,
   requestConfig?: AxiosRequestConfig,
@@ -47,3 +41,4 @@ function useData<T>(
 }
 
 export default useData;
+*/

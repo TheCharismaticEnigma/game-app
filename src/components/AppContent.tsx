@@ -29,10 +29,12 @@ function AppContent() {
   const { selectedGenre, page = 0 } = gameQuery;
 
   const {
-    data: games,
+    data: gameResponseData,
     error: imageError,
     isLoading: loadingImages,
   } = useGames(gameQuery);
+
+  const games = gameResponseData?.results;
 
   const { data, error: genreError, isLoading: loadingGenres } = useGenres();
 

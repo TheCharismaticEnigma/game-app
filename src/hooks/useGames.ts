@@ -1,5 +1,6 @@
-import useData from './useData';
+import { useQuery } from '@tanstack/react-query';
 import { GameQuery } from '../components/AppContent';
+import HttpService, { FetchResponse } from '../utils/RogueHttpService';
 
 interface Platform {
   id: number;
@@ -19,6 +20,7 @@ interface Game {
 // Query Object Pattern. Have all the queries in a single object instead of individual queries.
 // When query param values are nullish, they aren't sent.
 
+/*
 const useGames = (gameQuery: GameQuery) => {
   const requestConfig = {
     params: {
@@ -32,6 +34,29 @@ const useGames = (gameQuery: GameQuery) => {
   };
 
   return useData<Game>('/games', requestConfig, [gameQuery]);
+};
+*/
+
+// everytime cache changes, data is refetched
+const useGames = (gameQuery: GameQuery) => {
+  const requestConfig = {
+    params: {
+      genres: gameQuery?.selectedGenre?.id,
+      parent_platforms: gameQuery?.selectedPlatform?.id,
+      search: gameQuery?.searchQuery,
+      ordering: gameQuery?.orderBy,
+      page: gameQuery?.page ?? 1,
+      page_size: 20,
+    },
+  };
+
+  return useQuery<FetchResponse<Game>, Error>({
+    queryKey: ['games', gameQuery],
+    queryFn: () =>
+      HttpService.get<FetchResponse<Game>>('/games', requestConfig).then(
+        (response) => response.data
+      ),
+  });
 };
 
 export { useGames, type Game };
