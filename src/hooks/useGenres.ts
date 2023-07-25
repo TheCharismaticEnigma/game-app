@@ -8,13 +8,23 @@ interface Genre {
 }
 
 // const useGenres = () => useData<Genre>('/genres');
+const genreService = new HttpService<Genre>('/genres');
+
+// const useGenres = () => {
+//   return useQuery<FetchResponse<Genre>, Error>({
+//     queryKey: ['genres'],
+//     queryFn: () =>{ return genreService.getAll() ; },
+//     staleTime: 24 * 60 * 60 * 1000, // Refetch after 24h
+//   });
+// };
 
 const useGenres = () => {
   return useQuery<FetchResponse<Genre>, Error>({
     queryKey: ['genres'],
-    queryFn: () =>
-      HttpService.get<FetchResponse<Genre>>('/genres').then((r) => r.data),
-    staleTime: 24 * 60 * 60 * 1000, // Refetch after 24h
+    queryFn: () => {
+      return genreService.getAll();
+    },
+    staleTime: 24 * 60 * 60 * 1000,
   });
 };
 

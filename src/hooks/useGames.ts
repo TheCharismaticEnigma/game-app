@@ -12,6 +12,8 @@ interface Game {
   rating_top: number;
 }
 
+const gameService = new HttpService<Game>('/games');
+
 // Query Object Pattern. Have all the queries in a single object instead of individual queries.
 // When query param values are nullish, they aren't sent.
 
@@ -47,10 +49,9 @@ const useGames = (gameQuery: GameQuery) => {
 
   return useQuery<FetchResponse<Game>, Error>({
     queryKey: ['games', gameQuery],
-    queryFn: () =>
-      HttpService.get<FetchResponse<Game>>('/games', requestConfig).then(
-        (response) => response.data
-      ),
+    queryFn: () => {
+      return gameService.getAll(requestConfig);
+    },
   });
 };
 
