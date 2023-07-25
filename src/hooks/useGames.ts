@@ -1,12 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { GameQuery } from '../components/AppContent';
 import HttpService, { FetchResponse } from '../utils/RogueHttpService';
-
-interface Platform {
-  id: number;
-  name: string;
-  slug: string;
-}
+import { Platform } from './usePlatforms';
 interface Game {
   id: number;
   name: string;
