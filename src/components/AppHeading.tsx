@@ -8,7 +8,11 @@ interface GameHeadingProps {
 const AppHeading = (Props: GameHeadingProps) => {
   const { selectedGenreHeading = 'TOP PICKS', selectedPlatformHeading = '' } =
     Props;
-  console.log(selectedPlatformHeading);
+
+  const platformName = `${selectedPlatformHeading
+    .charAt(0)
+    .toUpperCase()}${selectedPlatformHeading.slice(1)}`;
+
   const { colorMode } = useColorMode();
   const suffix = `${selectedGenreHeading === 'TOP PICKS' ? '' : 'Games'}`;
 
@@ -21,7 +25,7 @@ const AppHeading = (Props: GameHeadingProps) => {
         fontFamily={'system'}
         as={'h1'}
       >
-        {selectedPlatformHeading} {selectedGenreHeading} {suffix}
+        {platformName} {selectedGenreHeading} {suffix}
       </Heading>
     </>
   );
