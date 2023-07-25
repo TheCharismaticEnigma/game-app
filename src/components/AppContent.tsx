@@ -33,11 +33,9 @@ function AppContent() {
     error: imageError,
     isLoading: loadingImages,
   } = useGames(gameQuery);
-
   const games = gameResponseData?.results;
 
   const { data, error: genreError, isLoading: loadingGenres } = useGenres();
-
   const genres = data?.results;
 
   const genreErrorisAxios = genreError?.name === 'AxiosError';
@@ -51,7 +49,7 @@ function AppContent() {
         width={'min(100%, 1250px)'}
         gridTemplateColumns={{
           base: '1fr',
-          md: '22rem 1fr  ',
+          md: '22rem 1fr',
         }}
         justifyItems={{
           base: 'center',
@@ -110,7 +108,11 @@ function AppContent() {
         <GridItem area={'main'} overflow={'auto'} scrollBehavior={'smooth'}>
           <Box w={'100%'} pr={'1rem'}>
             <Flex mb={'3rem'} gap={'2rem'} as={'div'} direction={'column'}>
-              <AppHeading selectedGenreHeading={selectedGenre?.name} />
+              <AppHeading
+                selectedPlatformHeading={gameQuery.selectedPlatform?.name}
+                selectedGenreHeading={selectedGenre?.name}
+              />
+
               <Dropdowns
                 selectPlatform={(platform: Platform | null) =>
                   setGameQuery({ ...gameQuery, selectedPlatform: platform })

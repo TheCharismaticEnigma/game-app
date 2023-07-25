@@ -2,10 +2,13 @@ import { Heading, useColorMode } from '@chakra-ui/react';
 
 interface GameHeadingProps {
   selectedGenreHeading?: string;
+  selectedPlatformHeading?: string;
 }
 
 const AppHeading = (Props: GameHeadingProps) => {
-  const { selectedGenreHeading = 'TOP PICKS' } = Props;
+  const { selectedGenreHeading = 'TOP PICKS', selectedPlatformHeading = '' } =
+    Props;
+  console.log(selectedPlatformHeading);
   const { colorMode } = useColorMode();
   const suffix = `${selectedGenreHeading === 'TOP PICKS' ? '' : 'Games'}`;
 
@@ -18,7 +21,7 @@ const AppHeading = (Props: GameHeadingProps) => {
         fontFamily={'system'}
         as={'h1'}
       >
-        {selectedGenreHeading} {suffix}
+        {selectedPlatformHeading} {selectedGenreHeading} {suffix}
       </Heading>
     </>
   );
