@@ -6,7 +6,6 @@ import CardSkeleton from '../utils/CardSkeleton';
 interface GameContainerProps {
   isLoading: boolean;
   games: Game[] | undefined;
-
   gridDisplayIsActive: boolean;
 }
 

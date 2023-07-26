@@ -1,13 +1,22 @@
 import { Heading, useColorMode } from '@chakra-ui/react';
-
+import usePlatforms from '../hooks/usePlatforms';
+import { useGenres } from '../hooks/useGenres';
 interface GameHeadingProps {
-  selectedGenreHeading?: string;
-  selectedPlatformHeading?: string;
+  selectedGenreId?: number;
+  selectedPlatformId?: number;
 }
 
 const AppHeading = (Props: GameHeadingProps) => {
-  const { selectedGenreHeading = 'TOP PICKS', selectedPlatformHeading = '' } =
-    Props;
+  const { selectedGenreId, selectedPlatformId } = Props;
+  const { data: genres } = useGenres();
+  const { data: platforms } = usePlatforms();
+
+  const selectedPlatformHeading =
+    genres?.results.find(({ id }) => id === selectedGenreId)?.name || '';
+
+  const selectedGenreHeading =
+    platforms?.results.find(({ id }) => id === selectedPlatformId)?.name ||
+    'TOP PICKS';
 
   const platformName = `${selectedPlatformHeading
     .charAt(0)

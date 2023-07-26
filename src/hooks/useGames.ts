@@ -38,8 +38,8 @@ const useGames = (gameQuery: GameQuery) => {
 const useGames = (gameQuery: GameQuery) => {
   const requestConfig = {
     params: {
-      genres: gameQuery?.selectedGenre?.id,
-      parent_platforms: gameQuery?.selectedPlatform?.id,
+      genres: gameQuery?.selectedGenreId,
+      parent_platforms: gameQuery?.selectedPlatformId,
       search: gameQuery?.searchQuery,
       ordering: gameQuery?.orderBy,
       page: gameQuery?.page ?? 1,

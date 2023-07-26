@@ -15,8 +15,8 @@ import SideBar from './SideBar';
 
 // Contains schema of all the query parameters used to fetch games.
 interface GameQuery {
-  selectedGenre?: Genre; // selected Genre
-  selectedPlatform?: Platform; // selected Platform
+  selectedGenreId?: number; // selected Genre
+  selectedPlatformId?: number; // selected Platform
   searchQuery?: string;
   orderBy?: string;
   page: number;
@@ -27,7 +27,7 @@ function AppContent() {
   const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);
   const [isGridDisplay, setGridDisplayStatus] = useState(true);
 
-  const { selectedGenre } = gameQuery;
+  // const { selectedGenre } = gameQuery;
 
   const {
     data: allGamePages,
@@ -102,9 +102,9 @@ function AppContent() {
             {!genreErrorisAxios && (
               <SideBar
                 genres={genres}
-                selectedGenre={selectedGenre}
+                selectedGenreId={gameQuery.selectedGenreId}
                 getSelectedGenre={(genre: Genre) => {
-                  setGameQuery({ ...gameQuery, selectedGenre: genre });
+                  setGameQuery({ ...gameQuery, selectedGenreId: genre.id });
                 }}
               />
             )}
@@ -115,13 +115,16 @@ function AppContent() {
           <Box w={'100%'} pr={'1rem'}>
             <Flex mb={'3rem'} gap={'2rem'} as={'div'} direction={'column'}>
               <AppHeading
-                selectedPlatformHeading={gameQuery.selectedPlatform?.name}
-                selectedGenreHeading={selectedGenre?.name}
+                selectedPlatformId={gameQuery.selectedPlatformId}
+                selectedGenreId={gameQuery.selectedGenreId}
               />
 
               <Dropdowns
                 selectPlatform={(platform: Platform) =>
-                  setGameQuery({ ...gameQuery, selectedPlatform: platform })
+                  setGameQuery({
+                    ...gameQuery,
+                    selectedPlatformId: platform.id,
+                  })
                 }
                 selectOrdering={(ordering: string) => {
                   setGameQuery({ ...gameQuery, orderBy: ordering });
