@@ -11,7 +11,7 @@ import {
 import { Platform, usePlatforms } from '../hooks/usePlatforms';
 interface DropdownProps {
   selectPlatform: (selectedPlatform: Platform) => void;
-  selectOrdering: (selectedOrdering: string | null) => void;
+  selectOrdering: (selectedOrdering: string) => void;
   setDisplay: (gridDisplayStatus: boolean) => void;
 }
 

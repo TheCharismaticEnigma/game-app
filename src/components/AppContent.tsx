@@ -15,11 +15,11 @@ import SideBar from './SideBar';
 
 // Contains schema of all the query parameters used to fetch games.
 interface GameQuery {
-  selectedGenre: Genre | null; // selected Genre
-  selectedPlatform: Platform | null; // selected Platform
-  searchQuery: string | null;
-  orderBy: string | null;
-  page?: number;
+  selectedGenre?: Genre; // selected Genre
+  selectedPlatform?: Platform; // selected Platform
+  searchQuery?: string;
+  orderBy?: string;
+  page: number;
   page_size?: number;
 }
 
@@ -120,10 +120,10 @@ function AppContent() {
               />
 
               <Dropdowns
-                selectPlatform={(platform: Platform | null) =>
+                selectPlatform={(platform: Platform) =>
                   setGameQuery({ ...gameQuery, selectedPlatform: platform })
                 }
-                selectOrdering={(ordering: string | null) => {
+                selectOrdering={(ordering: string) => {
                   setGameQuery({ ...gameQuery, orderBy: ordering });
                 }}
                 setDisplay={(gridDisplayActive: boolean) => {

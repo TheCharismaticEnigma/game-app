@@ -4,7 +4,7 @@ import GenreList from './GenreList';
 
 export interface SideBarProps {
   genres: Genre[] | undefined;
-  selectedGenre: Genre | null;
+  selectedGenre?: Genre;
   getSelectedGenre: (genre: Genre) => void;
 }
 
