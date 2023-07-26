@@ -1,23 +1,17 @@
 // Common parent that manages the State for both Sidebar and App Content.
 import { useState } from 'react';
-import {
-  Grid,
-  GridItem,
-  Flex,
-  Box,
-  Spinner,
-  Text,
-  Button,
-} from '@chakra-ui/react';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
-import NavBar from './NavBar';
-import AppHeading from './AppHeading';
-import SideBar from './SideBar';
-import GameContainer from './GameContainer';
-import Dropdowns from './Dropdowns';
+import { Box, Flex, Grid, GridItem, Spinner, Text } from '@chakra-ui/react';
+
 import { Game, useAllGames } from '../hooks/useAllGames';
 import { Genre, useGenres } from '../hooks/useGenres';
 import { Platform } from '../hooks/usePlatforms';
+import AppHeading from './AppHeading';
+import Dropdowns from './Dropdowns';
+import GameContainer from './GameContainer';
+import NavBar from './NavBar';
+import SideBar from './SideBar';
 
 // Contains schema of all the query parameters used to fetch games.
 interface GameQuery {
@@ -39,7 +33,6 @@ function AppContent() {
     data: allGamePages,
     error: imageError,
     isLoading: loadingImages,
-    isFetchingNextPage,
     fetchNextPage,
     hasNextPage,
   } = useAllGames(gameQuery);
@@ -150,15 +143,46 @@ function AppContent() {
               </Text>
             )}
 
+            {/* !!value => if value is nullish, then converted to false*/}
+
             {!imageErrorisAxios && (
-              <GameContainer
-                gridDisplayIsActive={isGridDisplay}
-                isLoading={loadingImages}
-                games={allGames}
-              />
+              <InfiniteScroll
+                dataLength={allGames?.length ?? 0} //This is important field to render the next data
+                next={() => {
+                  // dataLength takes the value of total components fetched so far.
+                  fetchNextPage();
+                }}
+                hasMore={!!hasNextPage}
+                scrollThreshold={0.8}
+                loader={
+                  <p
+                    style={{
+                      textAlign: 'center',
+                      fontSize: '2rem',
+                      margin: '1.5rem auto',
+                      color: 'red',
+                    }}
+                  >
+                    Loading...
+                  </p>
+                }
+                endMessage={
+                  <p style={{ textAlign: 'center' }}>
+                    <b>Yay! You have seen it all</b>
+                  </p>
+                }
+              >
+                {
+                  <GameContainer
+                    gridDisplayIsActive={isGridDisplay}
+                    isLoading={loadingImages}
+                    games={allGames}
+                  />
+                }
+              </InfiniteScroll>
             )}
 
-            {hasNextPage && (
+            {/* {hasNextPage && (
               <Button
                 size={'lg'}
                 marginY={5}
@@ -170,7 +194,7 @@ function AppContent() {
               >
                 {isFetchingNextPage ? 'Loading' : 'Load More'}
               </Button>
-            )}
+            )} */}
           </Box>
         </GridItem>
       </Grid>
@@ -178,4 +202,4 @@ function AppContent() {
   );
 }
 
-export { type GameQuery, AppContent };
+export { AppContent, type GameQuery };

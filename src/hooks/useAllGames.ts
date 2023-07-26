@@ -32,6 +32,7 @@ const gameService = new HttpService<Game>('/games');
   },
 };
 */
+
 const useAllGames = (gameQuery: GameQuery) => {
   return useInfiniteQuery<FetchResponse<Game>, Error>({
     queryKey: ['games', gameQuery],
@@ -52,6 +53,7 @@ const useAllGames = (gameQuery: GameQuery) => {
     getNextPageParam: (lastPage, allPages) => {
       return lastPage.next ? allPages.length + 1 : undefined;
     },
+    staleTime: 24 * 60 * 60 * 1000, // 24hrs
   });
 };
 
