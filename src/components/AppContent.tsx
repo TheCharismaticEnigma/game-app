@@ -15,10 +15,9 @@ import AppHeading from './AppHeading';
 import SideBar from './SideBar';
 import GameContainer from './GameContainer';
 import Dropdowns from './Dropdowns';
-import { useAllGames } from '../hooks/useAllGames';
+import { Game, useAllGames } from '../hooks/useAllGames';
 import { Genre, useGenres } from '../hooks/useGenres';
 import { Platform } from '../hooks/usePlatforms';
-import { Game } from '../hooks/useAllGames';
 
 // Contains schema of all the query parameters used to fetch games.
 interface GameQuery {
@@ -51,11 +50,9 @@ function AppContent() {
   const genreErrorisAxios = genreError?.name === 'AxiosError';
   const imageErrorisAxios = imageError?.name === 'AxiosError';
 
-  /*
   const allGames = allGamePages?.pages.reduce((currentGames, page) => {
     return [...currentGames, ...page.results];
   }, [] as Game[]);
-   */
 
   return (
     <>
@@ -157,9 +154,7 @@ function AppContent() {
               <GameContainer
                 gridDisplayIsActive={isGridDisplay}
                 isLoading={loadingImages}
-                games={allGamePages?.pages.reduce((currentGames, page) => {
-                  return [...currentGames, ...page.results];
-                }, [] as Game[])}
+                games={allGames}
               />
             )}
 
