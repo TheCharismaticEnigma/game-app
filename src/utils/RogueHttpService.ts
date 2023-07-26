@@ -2,6 +2,8 @@ import axios, { AxiosRequestConfig } from 'axios';
 //  const key = `b3edbbccbb684a8b88a68744acbcf2df`;
 export interface FetchResponse<T> {
   count: number;
+  previous: string | null;
+  next: string | null;
   results: T[];
 }
 

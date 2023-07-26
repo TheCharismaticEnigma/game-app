@@ -1,16 +1,24 @@
 // Common parent that manages the State for both Sidebar and App Content.
 import { useState } from 'react';
-import { Flex, Box, Spinner, Text } from '@chakra-ui/react';
-import { Grid, GridItem } from '@chakra-ui/react';
+import {
+  Grid,
+  GridItem,
+  Flex,
+  Box,
+  Spinner,
+  Text,
+  Button,
+} from '@chakra-ui/react';
 
 import NavBar from './NavBar';
 import AppHeading from './AppHeading';
 import SideBar from './SideBar';
 import GameContainer from './GameContainer';
 import Dropdowns from './Dropdowns';
-import { useGames } from '../hooks/useGames';
+import { useAllGames } from '../hooks/useAllGames';
 import { Genre, useGenres } from '../hooks/useGenres';
 import { Platform } from '../hooks/usePlatforms';
+import { Game } from '../hooks/useAllGames';
 
 // Contains schema of all the query parameters used to fetch games.
 interface GameQuery {
@@ -26,20 +34,28 @@ function AppContent() {
   const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);
   const [isGridDisplay, setGridDisplayStatus] = useState(true);
 
-  const { selectedGenre, page = 0 } = gameQuery;
+  const { selectedGenre } = gameQuery;
 
   const {
-    data: gameResponseData,
+    data: allGamePages,
     error: imageError,
     isLoading: loadingImages,
-  } = useGames(gameQuery);
-  const games = gameResponseData?.results;
+    isFetchingNextPage,
+    fetchNextPage,
+    hasNextPage,
+  } = useAllGames(gameQuery);
 
   const { data, error: genreError, isLoading: loadingGenres } = useGenres();
   const genres = data?.results;
 
   const genreErrorisAxios = genreError?.name === 'AxiosError';
   const imageErrorisAxios = imageError?.name === 'AxiosError';
+
+  /*
+  const allGames = allGamePages?.pages.reduce((currentGames, page) => {
+    return [...currentGames, ...page.results];
+  }, [] as Game[]);
+   */
 
   return (
     <>
@@ -141,14 +157,24 @@ function AppContent() {
               <GameContainer
                 gridDisplayIsActive={isGridDisplay}
                 isLoading={loadingImages}
-                games={games}
-                fetchNextGamesPage={() => {
-                  setGameQuery({
-                    ...gameQuery,
-                    page: page + 1,
-                  });
-                }}
+                games={allGamePages?.pages.reduce((currentGames, page) => {
+                  return [...currentGames, ...page.results];
+                }, [] as Game[])}
               />
+            )}
+
+            {hasNextPage && (
+              <Button
+                size={'lg'}
+                marginY={5}
+                marginLeft={2}
+                disabled={!hasNextPage}
+                onClick={() => {
+                  fetchNextPage();
+                }}
+              >
+                {isFetchingNextPage ? 'Loading' : 'Load More'}
+              </Button>
             )}
           </Box>
         </GridItem>
