@@ -160,15 +160,22 @@ function AppContent() {
                       textAlign: 'center',
                       fontSize: '2rem',
                       margin: '1.5rem auto',
-                      color: 'red',
+                      color: '#6DC849',
                     }}
                   >
                     Loading...
                   </p>
                 }
                 endMessage={
-                  <p style={{ textAlign: 'center' }}>
-                    <b>Yay! You have seen it all</b>
+                  <p
+                    style={{
+                      textAlign: 'center',
+                      fontStyle: 'italic',
+                      fontSize: '3rem',
+                      color: '#6DC849',
+                    }}
+                  >
+                    <b>Yay! You have seen it all!</b>
                   </p>
                 }
               >

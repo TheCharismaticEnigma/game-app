@@ -37,6 +37,8 @@ const useAllGames = (gameQuery: GameQuery) => {
   return useInfiniteQuery<FetchResponse<Game>, Error>({
     queryKey: ['games', gameQuery],
 
+    //   If the param keys are mapped to null/undefined, they're omitted.
+
     queryFn: ({ pageParam = 1 }) => {
       return gameService.getAll({
         params: {
