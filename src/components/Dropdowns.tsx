@@ -9,7 +9,6 @@ import {
   HStack,
 } from '@chakra-ui/react';
 import { Platform, usePlatforms } from '../hooks/usePlatforms';
-import useSpecificPlatform from '../hooks/useSpecificPlatform';
 interface DropdownProps {
   selectPlatform: (selectedPlatform: Platform) => void;
   selectOrdering: (selectedOrdering: string) => void;
@@ -23,10 +22,6 @@ const Dropdowns = (Props: DropdownProps) => {
   const { colorMode } = useColorMode();
   const selectIconColor = `${colorMode === 'dark' ? '#6dc849' : '#671DDF'}`;
   const iconHoverColor = `${colorMode === 'dark' ? 'teal.400' : 'purple.800'}`;
-
-  const TargetPlatform = (value: string | number) => {
-    return useSpecificPlatform(value);
-  };
 
   return (
     <>
@@ -67,9 +62,11 @@ const Dropdowns = (Props: DropdownProps) => {
             width={'15rem'}
             placeholder="Platforms"
             onChange={(event) => {
-              // eslint-disable-next-line react-hooks/rules-of-hooks
-              const targetPlatform = TargetPlatform(event.target?.value);
-              if (targetPlatform) selectPlatform(targetPlatform);
+              const target = platforms?.find(
+                (platform) => platform.slug === event.target?.value
+              );
+
+              if (target) selectPlatform(target);
             }}
           >
             {platforms?.map((platform) => {
