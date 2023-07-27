@@ -28,8 +28,6 @@ const AppHeading = (Props: GameHeadingProps) => {
   return (
     <>
       <Heading
-        border={'2px solid tomato '}
-        textAlign={{ base: 'center', md: 'left' }}
         color={`${colorMode === 'dark' ? '#6dc849' : '#671ddf'}`}
         fontWeight={'500'}
         fontSize={'8xl'}

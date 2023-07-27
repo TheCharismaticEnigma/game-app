@@ -57,10 +57,7 @@ function AppContent() {
           base: '1fr',
           md: '22rem 1fr',
         }}
-        justifyItems={{
-          base: 'center',
-          md: 'stretch',
-        }}
+        justifyItems={'stretch'}
         templateAreas={{
           base: `"nav" 
                  "main"`,
