@@ -4,6 +4,7 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import { GameQuery } from '../components/AppContent';
 import HttpService, { FetchResponse } from '../utils/RogueHttpService';
 import { Platform } from './usePlatforms';
+import staleTime from '../utils/staleTime';
 
 interface Game {
   id: number;
@@ -55,7 +56,7 @@ const useAllGames = (gameQuery: GameQuery) => {
     getNextPageParam: (lastPage, allPages) => {
       return lastPage.next ? allPages.length + 1 : undefined;
     },
-    staleTime: 24 * 60 * 60 * 1000, // 24hrs
+    staleTime: staleTime('24h'),
   });
 };
 

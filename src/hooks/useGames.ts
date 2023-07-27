@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { GameQuery } from '../components/AppContent';
 import HttpService, { FetchResponse } from '../utils/RogueHttpService';
 import { Platform } from './usePlatforms';
+import staleTime from '../utils/staleTime';
 interface Game {
   id: number;
   name: string;
@@ -52,6 +53,7 @@ const useGames = (gameQuery: GameQuery) => {
     queryFn: () => {
       return gameService.getAll(requestConfig);
     },
+    staleTime: staleTime('24h'),
   });
 };
 
