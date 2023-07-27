@@ -1,4 +1,4 @@
-import { List, ListItem, Flex } from '@chakra-ui/react';
+import { List, ListItem, Box } from '@chakra-ui/react';
 import { Genre } from '../hooks/useGenres';
 import GenreList from './GenreList';
 
@@ -13,13 +13,8 @@ const SideBar = (Props: SideBarProps) => {
 
   return (
     <>
-      <Flex
-        marginTop={'2rem'}
-        direction={'column'}
-        alignItems={'center'}
-        gap={'1rem '}
-      >
-        <List width={'85%'}>
+      <Box marginTop={'2rem'} position={'relative'}>
+        <List width={'85%'} margin={'0 auto '}>
           {genres?.map((genre) => {
             return (
               <ListItem key={genre.id}>
@@ -32,7 +27,7 @@ const SideBar = (Props: SideBarProps) => {
             );
           })}
         </List>
-      </Flex>
+      </Box>
     </>
   );
 };

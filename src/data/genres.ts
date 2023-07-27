@@ -884,4 +884,4 @@ const genres = () => {
 
 export default genres;
 
-// Because the genres aren't going to change anytime soon, we store them in a file and set it as intial data.
+// Genres aren't going to change anytime soon. So set it as intial data.
