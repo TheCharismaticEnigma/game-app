@@ -30,6 +30,8 @@ const NavBar = ({ onSearch }: Props) => {
             src={logo}
             alt="Website Logo"
             loading="lazy"
+            cursor={'pointer'}
+            onClick={() => window.location.reload()}
           />
         </Box>
         <Spacer />
