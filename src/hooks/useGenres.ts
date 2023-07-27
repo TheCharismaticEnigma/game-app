@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import HttpService, { FetchResponse } from '../utils/RogueHttpService';
+import genres from '../data/genres';
 interface Genre {
   id: number;
   name: string;
@@ -25,6 +26,7 @@ const useGenres = () => {
       return genreService.getAll();
     },
     staleTime: 24 * 60 * 60 * 1000,
+    initialData: genres,
   });
 };
 

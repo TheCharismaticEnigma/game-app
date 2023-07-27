@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import HttpService, { FetchResponse } from '../utils/RogueHttpService';
+import platforms from '../data/platforms';
 
 interface Platform {
   id: number;
@@ -25,6 +26,7 @@ const usePlatforms = () => {
       return platformService.getAll();
     },
     staleTime: 24 * 60 * 60 * 1000,
+    initialData: platforms,
   });
 };
 
