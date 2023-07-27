@@ -12,10 +12,10 @@ const AppHeading = (Props: GameHeadingProps) => {
   const { data: platforms } = usePlatforms();
 
   const selectedPlatformHeading =
-    genres?.results.find(({ id }) => id === selectedGenreId)?.name || '';
+    platforms?.results.find(({ id }) => id === selectedPlatformId)?.name || '';
 
   const selectedGenreHeading =
-    platforms?.results.find(({ id }) => id === selectedPlatformId)?.name ||
+    genres?.results.find(({ id }) => id === selectedGenreId)?.name ||
     'TOP PICKS';
 
   const platformName = `${selectedPlatformHeading
