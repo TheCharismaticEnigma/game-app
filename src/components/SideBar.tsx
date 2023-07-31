@@ -1,15 +1,15 @@
 import { List, ListItem, Box } from '@chakra-ui/react';
 import { Genre } from '../hooks/useGenres';
 import GenreList from './GenreList';
+import useGameQueryStore from '../store';
 
 export interface SideBarProps {
   genres: Genre[] | undefined;
-  selectedGenreId?: number;
-  getSelectedGenre: (genre: Genre) => void;
 }
 
 const SideBar = (Props: SideBarProps) => {
-  const { genres, selectedGenreId, getSelectedGenre } = Props;
+  const { gameQuery } = useGameQueryStore();
+  const { genres } = Props;
 
   return (
     <>
@@ -20,8 +20,7 @@ const SideBar = (Props: SideBarProps) => {
               <ListItem key={genre.id}>
                 <GenreList
                   genre={genre}
-                  isSelectedGenre={genre.id === selectedGenreId}
-                  updateGenre={getSelectedGenre}
+                  isSelectedGenre={genre.id === gameQuery.selectedGenreId}
                 />
               </ListItem>
             );

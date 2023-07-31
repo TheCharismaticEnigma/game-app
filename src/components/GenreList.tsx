@@ -1,15 +1,16 @@
 import { useRef } from 'react';
 import { Box, Stack, Image, Button } from '@chakra-ui/react';
 import { Genre } from '../hooks/useGenres';
+import useGameQueryStore from '../store';
 
 interface Props {
   genre: Genre;
   isSelectedGenre: boolean;
-  updateGenre: (genre: Genre) => void;
 }
 
-const GenreList = ({ genre, isSelectedGenre, updateGenre }: Props) => {
-  const { image_background, name, slug } = genre;
+const GenreList = ({ genre, isSelectedGenre }: Props) => {
+  const { setSelectedGenreId } = useGameQueryStore();
+  const { image_background, name, slug, id } = genre;
 
   const fontSize = `${isSelectedGenre ? '1.8' : '1.7'}rem`;
   const color = `${isSelectedGenre ? '#671DDF' : 'white'}`;
@@ -28,7 +29,7 @@ const GenreList = ({ genre, isSelectedGenre, updateGenre }: Props) => {
         />
         <Button
           onClick={() => {
-            updateGenre(genre);
+            setSelectedGenreId(id);
           }}
           overflow={'hidden'}
           variant={'link'}

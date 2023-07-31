@@ -1,22 +1,22 @@
-import { BiSolidGridAlt, BiSolidCard } from 'react-icons/bi';
 import {
   Flex,
-  Select,
-  Text,
-  Icon,
-  useColorMode,
-  Show,
   HStack,
+  Icon,
+  Select,
+  Show,
+  Text,
+  useColorMode,
 } from '@chakra-ui/react';
-import { Platform, usePlatforms } from '../hooks/usePlatforms';
+import { BiSolidCard, BiSolidGridAlt } from 'react-icons/bi';
+import { usePlatforms } from '../hooks/usePlatforms';
+import useGameQueryStore from '../store';
 interface DropdownProps {
-  selectPlatform: (selectedPlatform: Platform) => void;
-  selectOrdering: (selectedOrdering: string) => void;
   setDisplay: (gridDisplayStatus: boolean) => void;
 }
 
-const Dropdowns = (Props: DropdownProps) => {
-  const { selectPlatform, selectOrdering, setDisplay } = Props;
+const Dropdowns = ({ setDisplay }: DropdownProps) => {
+  const { setSearchOrder, setSelectedPlatformId } = useGameQueryStore();
+
   const { data } = usePlatforms();
   const platforms = data?.results;
   const { colorMode } = useColorMode();
@@ -42,7 +42,7 @@ const Dropdowns = (Props: DropdownProps) => {
             width={'15rem'}
             textAlign={'left'}
             onChange={(event) => {
-              selectOrdering(event.target.value);
+              setSearchOrder(event.target.value);
             }}
           >
             <option value="-added">Date added</option>
@@ -66,7 +66,7 @@ const Dropdowns = (Props: DropdownProps) => {
                 (platform) => platform.slug === event.target?.value
               );
 
-              if (target) selectPlatform(target);
+              if (target) setSelectedPlatformId(target.id);
             }}
           >
             {platforms?.map((platform) => {

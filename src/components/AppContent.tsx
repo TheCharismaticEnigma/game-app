@@ -5,29 +5,19 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import { Box, Flex, Grid, GridItem, Spinner, Text } from '@chakra-ui/react';
 
 import { Game, useAllGames } from '../hooks/useAllGames';
-import { Genre, useGenres } from '../hooks/useGenres';
-import { Platform } from '../hooks/usePlatforms';
+import { useGenres } from '../hooks/useGenres';
+import useGameQueryStore from '../store';
 import AppHeading from './AppHeading';
 import Dropdowns from './Dropdowns';
 import GameContainer from './GameContainer';
 import NavBar from './NavBar';
 import SideBar from './SideBar';
 
-// Contains schema of all the query parameters used to fetch games.
-interface GameQuery {
-  selectedGenreId?: number; // selected Genre
-  selectedPlatformId?: number; // selected Platform
-  searchQuery?: string;
-  orderBy?: string;
-  page: number;
-  page_size?: number;
-}
-
 function AppContent() {
-  const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);
-  const [isGridDisplay, setGridDisplayStatus] = useState(true);
+  // const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);
 
-  // const { selectedGenre } = gameQuery;
+  const { gameQuery } = useGameQueryStore();
+  const [isGridDisplay, setGridDisplayStatus] = useState(true);
 
   const {
     data: allGamePages,
@@ -67,11 +57,7 @@ function AppContent() {
         }}
       >
         <GridItem area={'nav'}>
-          <NavBar
-            onSearch={(searchQuery: string) => {
-              setGameQuery({ ...gameQuery, searchQuery });
-            }}
-          />
+          <NavBar />
         </GridItem>
 
         <GridItem
@@ -96,36 +82,16 @@ function AppContent() {
 
             {genreErrorisAxios && null}
 
-            {!genreErrorisAxios && (
-              <SideBar
-                genres={genres}
-                selectedGenreId={gameQuery.selectedGenreId}
-                getSelectedGenre={(genre: Genre) => {
-                  setGameQuery({ ...gameQuery, selectedGenreId: genre.id });
-                }}
-              />
-            )}
+            {!genreErrorisAxios && <SideBar genres={genres} />}
           </Box>
         </GridItem>
 
         <GridItem area={'main'} overflow={'auto'} scrollBehavior={'smooth'}>
           <Box w={'100%'} pr={'1rem'}>
             <Flex mb={'3rem'} gap={'2rem'} as={'div'} direction={'column'}>
-              <AppHeading
-                selectedPlatformId={gameQuery.selectedPlatformId}
-                selectedGenreId={gameQuery.selectedGenreId}
-              />
+              <AppHeading />
 
               <Dropdowns
-                selectPlatform={(platform: Platform) =>
-                  setGameQuery({
-                    ...gameQuery,
-                    selectedPlatformId: platform.id,
-                  })
-                }
-                selectOrdering={(ordering: string) => {
-                  setGameQuery({ ...gameQuery, orderBy: ordering });
-                }}
                 setDisplay={(gridDisplayActive: boolean) => {
                   setGridDisplayStatus(gridDisplayActive);
                 }}
@@ -209,4 +175,4 @@ function AppContent() {
   );
 }
 
-export { AppContent, type GameQuery };
+export { AppContent };

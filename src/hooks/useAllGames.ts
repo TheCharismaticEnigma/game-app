@@ -1,7 +1,7 @@
 // Contains the infinite scrolling functionality as opposed to pagination.
 
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { GameQuery } from '../components/AppContent';
+import { GameQuery } from '../store';
 import HttpService, { FetchResponse } from '../utils/RogueHttpService';
 import { Platform } from './usePlatforms';
 import staleTime from '../utils/staleTime';

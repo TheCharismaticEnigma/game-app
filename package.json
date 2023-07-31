@@ -24,7 +24,8 @@
     "react-icons": "^4.10.1",
     "react-infinite-scroll-component": "^6.1.0",
     "react-intersection-observer": "^9.5.2",
-    "vercel": "^24.2.4"
+    "vercel": "^24.2.4",
+    "zustand": "^4.3.9"
   },
   "devDependencies": {
     "@types/ms": "^0.7.31",

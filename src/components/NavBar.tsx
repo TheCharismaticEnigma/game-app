@@ -5,11 +5,11 @@ import { SearchIcon } from '@chakra-ui/icons';
 import { useColorMode } from '@chakra-ui/react';
 
 import logo from '../assets/logo.webp';
-interface Props {
-  onSearch: (query: string) => void;
-}
+import useGameQueryStore from '../store';
 
-const NavBar = ({ onSearch }: Props) => {
+const NavBar = () => {
+  const { setSearchQuery } = useGameQueryStore();
+
   const inputRef = useRef<HTMLInputElement>(null);
 
   const { colorMode, toggleColorMode } = useColorMode();
@@ -43,7 +43,7 @@ const NavBar = ({ onSearch }: Props) => {
               const { current } = inputRef;
 
               if (current && current.value.length > 0) {
-                onSearch(current.value);
+                setSearchQuery(current.value);
               }
             }}
           >
