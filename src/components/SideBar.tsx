@@ -8,7 +8,7 @@ export interface SideBarProps {
 }
 
 const SideBar = (Props: SideBarProps) => {
-  const { gameQuery } = useGameQueryStore();
+  const gameQuery = useGameQueryStore((s) => s.gameQuery);
   const { genres } = Props;
 
   return (

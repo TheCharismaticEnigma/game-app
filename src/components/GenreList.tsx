@@ -9,7 +9,7 @@ interface Props {
 }
 
 const GenreList = ({ genre, isSelectedGenre }: Props) => {
-  const { setSelectedGenreId } = useGameQueryStore();
+  const setSelectedGenreId = useGameQueryStore((s) => s.setSelectedGenreId);
   const { image_background, name, slug, id } = genre;
 
   const fontSize = `${isSelectedGenre ? '1.8' : '1.7'}rem`;

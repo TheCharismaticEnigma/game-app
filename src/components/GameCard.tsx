@@ -36,7 +36,7 @@ const GameCard = (Props: CardProps) => {
           <Stack mt="4" spacing="5">
             <HStack pointerEvents={'none'} justifyContent={'space-between'}>
               <Flex alignItems={'center'} gap={'10px'}>
-                {parent_platforms.map(({ platform: { slug, id } }) => {
+                {parent_platforms?.map(({ platform: { slug, id } }) => {
                   return <PlatformIcon key={id} slug={slug} id={id} />;
                 })}
               </Flex>

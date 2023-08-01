@@ -15,7 +15,12 @@ interface DropdownProps {
 }
 
 const Dropdowns = ({ setDisplay }: DropdownProps) => {
-  const { setSearchOrder, setSelectedPlatformId } = useGameQueryStore();
+  // Component will be coupled to JUST these two properties from store.
+  const setSearchOrder = useGameQueryStore((s) => s.setSearchOrder);
+
+  const setSelectedPlatformId = useGameQueryStore(
+    (s) => s.setSelectedPlatformId
+  );
 
   const { data } = usePlatforms();
   const platforms = data?.results;

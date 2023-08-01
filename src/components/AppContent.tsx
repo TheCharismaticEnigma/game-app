@@ -16,7 +16,9 @@ import SideBar from './SideBar';
 function AppContent() {
   // const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);
 
-  const { gameQuery } = useGameQueryStore();
+  // We want this component to rerender ONLY WHEN GAME QUERY OBJECT CHANGES.
+  const gameQuery = useGameQueryStore((selector) => selector.gameQuery);
+
   const [isGridDisplay, setGridDisplayStatus] = useState(true);
 
   const {

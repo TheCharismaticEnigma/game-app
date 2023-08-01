@@ -8,7 +8,7 @@ import logo from '../assets/logo.webp';
 import useGameQueryStore from '../store';
 
 const NavBar = () => {
-  const { setSearchQuery } = useGameQueryStore();
+  const setSearchQuery = useGameQueryStore((s) => s.setSearchQuery);
 
   const inputRef = useRef<HTMLInputElement>(null);
 
