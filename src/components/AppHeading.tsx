@@ -13,8 +13,8 @@ const AppHeading = () => {
       ?.name || '';
 
   const selectedGenreHeading =
-    genres?.results.find(({ id }) => id === gameQuery.selectedPlatformId)
-      ?.name || 'TOP PICKS';
+    genres?.results.find(({ id }) => id === gameQuery.selectedGenreId)?.name ||
+    'TOP PICKS';
 
   const platformName = `${selectedPlatformHeading
     .charAt(0)
