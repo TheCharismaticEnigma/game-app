@@ -4,7 +4,8 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 
 import { Box, Flex, Grid, GridItem, Spinner, Text } from '@chakra-ui/react';
 
-import { Game, useAllGames } from '../hooks/useAllGames';
+import { useAllGames } from '../hooks/useAllGames';
+import { Game } from '../entities/Game';
 import { useGenres } from '../hooks/useGenres';
 import useGameQueryStore from '../store';
 import AppHeading from './AppHeading';

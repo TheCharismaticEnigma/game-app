@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { Box, Stack, Image, Button } from '@chakra-ui/react';
-import { Genre } from '../hooks/useGenres';
+import { Genre } from '../entities/Genre';
 import useGameQueryStore from '../store';
 
 interface Props {

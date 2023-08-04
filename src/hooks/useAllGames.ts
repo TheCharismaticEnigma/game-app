@@ -3,20 +3,8 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { GameQuery } from '../store';
 import HttpService, { FetchResponse } from '../utils/RogueHttpService';
-import { Platform } from './usePlatforms';
 import staleTime from '../utils/staleTime';
-
-interface Game {
-  id: number;
-  name: string;
-  slug: string;
-  background_image: string;
-  metacritic: number;
-  parent_platforms: { platform: Platform }[];
-  rating_top: number;
-  description: string;
-  description_raw: string;
-}
+import { Game } from '../entities/Game';
 
 const gameService = new HttpService<Game>('/games');
 

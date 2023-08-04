@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import HttpService from '../utils/RogueHttpService';
 import staleTime from '../utils/staleTime';
-import { Game } from './useAllGames';
+import { Game } from '../entities/Game';
 
 const useGame = (target: number | string) => {
   const genreService = new HttpService<Game>(`/games/${target}`);

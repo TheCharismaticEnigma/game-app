@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { GameQuery } from '../store';
 import HttpService, { FetchResponse } from '../utils/RogueHttpService';
-import { Platform } from './usePlatforms';
+import { Platform } from '../entities/Platform';
 import staleTime from '../utils/staleTime';
 interface Game {
   id: number;

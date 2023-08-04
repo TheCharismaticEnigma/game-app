@@ -1,5 +1,5 @@
 import { List, ListItem, Box } from '@chakra-ui/react';
-import { Genre } from '../hooks/useGenres';
+import { Genre } from '../entities/Genre';
 import GenreList from './GenreList';
 import useGameQueryStore from '../store';
 
