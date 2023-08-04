@@ -31,6 +31,12 @@ class HttpService<T> {
 
     return result;
   };
+
+  getSpecific = () => {
+    return axiosInstance.get<T>(this.#endpoint).then((response) => {
+      return response.data;
+    });
+  };
 }
 
 export default HttpService;

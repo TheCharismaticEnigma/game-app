@@ -14,6 +14,8 @@ interface Game {
   metacritic: number;
   parent_platforms: { platform: Platform }[];
   rating_top: number;
+  description: string;
+  description_raw: string;
 }
 
 const gameService = new HttpService<Game>('/games');

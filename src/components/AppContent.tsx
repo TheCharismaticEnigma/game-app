@@ -10,7 +10,6 @@ import useGameQueryStore from '../store';
 import AppHeading from './AppHeading';
 import Dropdowns from './Dropdowns';
 import GameContainer from './GameContainer';
-import NavBar from './NavBar';
 import SideBar from './SideBar';
 
 function AppContent() {
@@ -51,16 +50,15 @@ function AppContent() {
         }}
         justifyItems={'stretch'}
         templateAreas={{
-          base: `"nav" 
-                 "main"`,
-
-          md: `"nav   nav"
-               "aside main" `,
+          base: `"main"`,
+          md: `"aside main" `,
         }}
       >
+        {/*  
+        NavBar is permanently on top. 
         <GridItem area={'nav'}>
           <NavBar />
-        </GridItem>
+        </GridItem> */}
 
         <GridItem
           area={'aside'}
@@ -177,4 +175,4 @@ function AppContent() {
   );
 }
 
-export { AppContent };
+export default AppContent;

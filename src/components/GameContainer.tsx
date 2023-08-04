@@ -1,7 +1,7 @@
 import { Grid, GridItem } from '@chakra-ui/react';
-import GameCard from './GameCard';
 import { Game } from '../hooks/useGames';
 import CardSkeleton from '../utils/CardSkeleton';
+import GameCard from './GameCard';
 
 interface GameContainerProps {
   isLoading: boolean;
@@ -60,6 +60,10 @@ const GameContainer = (Props: GameContainerProps) => {
             return (
               <GridItem
                 as={'li'}
+                _hover={{
+                  transform: 'scale(1.02)',
+                  transition: 'transform 300ms ease-in-out',
+                }}
                 width={gridDisplayIsActive ? gridView.width : cardView.width}
                 height={gridDisplayIsActive ? gridView.height : cardView.height}
                 key={game.id}
