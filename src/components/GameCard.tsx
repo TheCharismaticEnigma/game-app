@@ -1,5 +1,4 @@
 import {
-  Box,
   Card,
   CardBody,
   Flex,
@@ -13,6 +12,7 @@ import { Game } from '../hooks/useGames';
 import PlatformIcon from '../utils/PlatformIcons';
 import RatingIcon from '../utils/RatingIcons';
 import getCroppedImageUrl from '../utils/getCroppedImageUrl';
+import CriticScore from './CriticScore';
 interface CardProps {
   game: Game;
   imageHeight: string;
@@ -27,7 +27,6 @@ const GameCard = (Props: CardProps) => {
     rating_top,
     slug,
   } = Props.game;
-  const metaColor = `${metacritic > 75 ? '#6dc849' : 'yellow'}`;
 
   return (
     <>
@@ -55,19 +54,7 @@ const GameCard = (Props: CardProps) => {
                     return <PlatformIcon key={id} slug={slug} id={id} />;
                   })}
                 </Flex>
-                {metacritic > 40 && (
-                  <Box
-                    color={metaColor}
-                    border={`1.5px solid ${metaColor}`}
-                    borderRadius={'5px'}
-                    padding={'0.1rem 0.5rem'}
-                    textAlign={'center'}
-                    fontWeight={'500'}
-                    fontSize={'small'}
-                  >
-                    {metacritic}
-                  </Box>
-                )}
+                {metacritic > 40 && <CriticScore metacritic={metacritic} />}
               </HStack>
               <Flex
                 gap={'2rem '}
