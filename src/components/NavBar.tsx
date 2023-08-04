@@ -1,9 +1,19 @@
-import { useRef } from 'react';
-import { Box, Flex, Spacer, Image, Show } from '@chakra-ui/react';
-import { FormControl, FormLabel, Input, Switch } from '@chakra-ui/react';
 import { SearchIcon } from '@chakra-ui/icons';
-import { useColorMode } from '@chakra-ui/react';
+import {
+  Box,
+  Flex,
+  FormControl,
+  FormLabel,
+  Image,
+  Input,
+  Show,
+  Spacer,
+  Switch,
+  useColorMode,
+} from '@chakra-ui/react';
+import { useRef } from 'react';
 
+import { Link, useLocation } from 'react-router-dom';
 import logo from '../assets/logo.webp';
 import useGameQueryStore from '../store';
 
@@ -13,6 +23,8 @@ const NavBar = () => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const { colorMode, toggleColorMode } = useColorMode();
+
+  const location = useLocation();
 
   return (
     <>
@@ -24,15 +36,21 @@ const NavBar = () => {
         alignItems={'center'}
       >
         <Box h={'5rem'} w={'6rem'}>
-          <Image
-            h={'100%'}
-            w={'100%'}
-            src={logo}
-            alt="Website Logo"
-            loading="lazy"
-            cursor={'pointer'}
-            onClick={() => window.location.reload()}
-          />
+          <Link
+            to={'/'}
+            onClick={() => {
+              if (location.pathname === '/') window.location.reload();
+            }}
+          >
+            <Image
+              h={'100%'}
+              w={'100%'}
+              src={logo}
+              alt="Website Logo"
+              loading="lazy"
+              cursor={'pointer'}
+            />
+          </Link>
         </Box>
         <Spacer />
 
