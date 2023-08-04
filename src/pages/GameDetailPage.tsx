@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 import useGame from '../hooks/useGame';
-import { Flex, Heading, Spinner, Text } from '@chakra-ui/react';
+import { Flex, Heading, Spinner } from '@chakra-ui/react';
+import ExpandableText from '../components/ExpandableText';
 
 const GameDetailPage = () => {
   const { slug = '' } = useParams();
@@ -15,9 +16,12 @@ const GameDetailPage = () => {
     <>
       {isLoading && <Spinner size={'xl'} margin={'50%'} />}
 
-      <Flex fontSize={'3rem'} direction={'column'} gap={'2rem'}>
+      <Flex padding={'5'} fontSize={'2rem'} direction={'column'} gap={'2rem'}>
         {game?.name && <Heading fontSize={'5rem'}>{game?.name}</Heading>}
-        {game?.description_raw && <Text>{game?.description_raw} </Text>}
+
+        {game?.description_raw && (
+          <ExpandableText text={game?.description_raw} />
+        )}
       </Flex>
     </>
   );
