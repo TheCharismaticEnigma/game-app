@@ -1,4 +1,5 @@
 import {
+  Box,
   Card,
   CardBody,
   Flex,
@@ -13,12 +14,15 @@ import PlatformIcon from '../utils/PlatformIcons';
 import RatingIcon from '../utils/RatingIcons';
 import getCroppedImageUrl from '../utils/getCroppedImageUrl';
 import CriticScore from './CriticScore';
+
 interface CardProps {
   game: Game;
   mediaHeight: string;
 }
 
 const GameCard = (Props: CardProps) => {
+  const { game, mediaHeight } = Props;
+
   const {
     background_image,
     name,
@@ -26,7 +30,7 @@ const GameCard = (Props: CardProps) => {
     parent_platforms,
     rating_top,
     slug,
-  } = Props.game;
+  } = game;
 
   return (
     <>
@@ -39,13 +43,17 @@ const GameCard = (Props: CardProps) => {
           width={'100%'}
           height={'100%'}
         >
-          <Image
-            src={getCroppedImageUrl(background_image)}
-            h={Props.mediaHeight}
-            objectFit={'cover'}
-            alt={`${name} game image`}
-            borderRadius="lg"
-          />
+          <Box h={mediaHeight}>
+            <Image
+              src={getCroppedImageUrl(background_image)}
+              h={'100%'}
+              width={'100%'}
+              objectFit={'cover'}
+              alt={`${name} game image`}
+              borderRadius="lg"
+            />
+          </Box>
+
           <CardBody>
             <Stack mt="4" spacing="5">
               <HStack pointerEvents={'none'} justifyContent={'space-between'}>
