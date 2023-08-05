@@ -2,9 +2,9 @@ import { Flex, GridItem, Heading, SimpleGrid, Spinner } from '@chakra-ui/react';
 import { useParams } from 'react-router-dom';
 import ExpandableText from '../components/ExpandableText';
 import GameAttributes from '../components/GameAttributes';
-import useGame from '../hooks/useGame';
-import GameTrailer from '../components/GameTrailer';
 import GameScreenshots from '../components/GameScreenshots';
+import GameTrailer from '../components/GameTrailer';
+import useGame from '../hooks/useGame';
 import EntitiyColor from '../utils/entitiyColor';
 
 const GameDetailPage = () => {
@@ -16,6 +16,7 @@ const GameDetailPage = () => {
   {
     /* ErrorPage will catch it and we'll log it in permanent place somewhere. */
   }
+  console.log(game);
 
   return (
     <>
