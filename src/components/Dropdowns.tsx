@@ -1,15 +1,8 @@
-import {
-  Flex,
-  HStack,
-  Icon,
-  Select,
-  Show,
-  Text,
-  useColorMode,
-} from '@chakra-ui/react';
+import { Flex, HStack, Icon, Select, Show, Text } from '@chakra-ui/react';
 import { BiSolidCard, BiSolidGridAlt } from 'react-icons/bi';
 import { usePlatforms } from '../hooks/usePlatforms';
 import useGameQueryStore from '../store';
+import EntitiyColor from '../utils/entitiyColor';
 interface DropdownProps {
   setDisplay: (gridDisplayStatus: boolean) => void;
 }
@@ -24,9 +17,8 @@ const Dropdowns = ({ setDisplay }: DropdownProps) => {
 
   const { data } = usePlatforms();
   const platforms = data?.results;
-  const { colorMode } = useColorMode();
-  const selectIconColor = `${colorMode === 'dark' ? '#6dc849' : '#671DDF'}`;
-  const iconHoverColor = `${colorMode === 'dark' ? 'teal.400' : 'purple.800'}`;
+
+  const { color: selectIconColor, hoverColor: iconHoverColor } = EntitiyColor();
 
   return (
     <>

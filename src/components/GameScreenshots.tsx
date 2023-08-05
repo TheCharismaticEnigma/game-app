@@ -13,9 +13,9 @@ const GameScreenshots = ({ gameId }: GameScreenshotsProps) => {
   if (error) throw error; // rethrow so that react router catches it
 
   return (
-    <SimpleGrid gap={3} columns={{ base: 1, md: 2 }}>
+    <SimpleGrid mt={4} gap={3} columns={{ base: 1, md: 2 }}>
       {screenshots?.results.map(({ id, image }) => (
-        <Image key={id} src={image} />
+        <Image borderRadius={'5px'} key={id} src={image} />
       ))}
     </SimpleGrid>
   );

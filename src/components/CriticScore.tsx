@@ -1,11 +1,12 @@
 import { Box } from '@chakra-ui/react';
+import EntitiyColor from '../utils/entitiyColor';
 
 interface Props {
   metacritic: number;
 }
 
 const CriticScore = ({ metacritic }: Props) => {
-  const metaColor = `${metacritic > 75 ? '#6dc849' : 'yellow'}`;
+  const { color: metaColor } = EntitiyColor();
 
   return (
     <Box

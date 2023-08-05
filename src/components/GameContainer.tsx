@@ -1,6 +1,6 @@
 import { Grid, GridItem } from '@chakra-ui/react';
 import { Game } from '../hooks/useGames';
-import CardSkeleton from '../utils/CardSkeleton';
+import CardSkeleton from './CardSkeleton';
 import GameCard from './GameCard';
 
 interface GameContainerProps {
