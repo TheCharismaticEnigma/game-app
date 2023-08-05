@@ -16,7 +16,7 @@ const GameContainer = (Props: GameContainerProps) => {
   const gridView = {
     width: 'minmax(100%,32rem)',
     height: '35rem',
-    imageHeight: '55%',
+    mediaHeight: '55%',
     gridTemplateColumns: {
       base: 'repeat(1,1fr)',
       md: 'repeat(2,1fr)',
@@ -27,7 +27,7 @@ const GameContainer = (Props: GameContainerProps) => {
   const cardView = {
     width: 'min(100%, 75rem)',
     height: '60rem',
-    imageHeight: '75%',
+    mediaHeight: '75%',
     gridTemplateColumns: {
       base: 'repeat(1,1fr)',
       md: 'repeat(1,1fr)',
@@ -70,10 +70,10 @@ const GameContainer = (Props: GameContainerProps) => {
               >
                 <GameCard
                   game={game}
-                  imageHeight={
+                  mediaHeight={
                     gridDisplayIsActive
-                      ? gridView.imageHeight
-                      : cardView.imageHeight
+                      ? gridView.mediaHeight
+                      : cardView.mediaHeight
                   }
                 />
               </GridItem>

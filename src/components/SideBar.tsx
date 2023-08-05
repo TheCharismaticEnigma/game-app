@@ -13,7 +13,7 @@ const SideBar = (Props: SideBarProps) => {
 
   return (
     <>
-      <Box marginTop={'2rem'} position={'relative'}>
+      <Box marginTop={'2rem'}>
         <List width={'85%'} margin={'0 auto '}>
           {genres?.map((genre) => {
             return (

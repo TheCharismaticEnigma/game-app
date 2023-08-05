@@ -68,6 +68,7 @@ function AppContent() {
             base: 'none',
             md: 'block',
           }}
+          height={'fit-content'}
         >
           <Box>
             {loadingGenres && (

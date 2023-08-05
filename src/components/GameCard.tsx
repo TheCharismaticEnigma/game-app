@@ -15,7 +15,7 @@ import getCroppedImageUrl from '../utils/getCroppedImageUrl';
 import CriticScore from './CriticScore';
 interface CardProps {
   game: Game;
-  imageHeight: string;
+  mediaHeight: string;
 }
 
 const GameCard = (Props: CardProps) => {
@@ -41,7 +41,7 @@ const GameCard = (Props: CardProps) => {
         >
           <Image
             src={getCroppedImageUrl(background_image)}
-            h={Props.imageHeight}
+            h={Props.mediaHeight}
             objectFit={'cover'}
             alt={`${name} game image`}
             borderRadius="lg"
