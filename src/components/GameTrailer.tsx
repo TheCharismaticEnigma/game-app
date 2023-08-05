@@ -15,7 +15,7 @@ const GameTrailer = ({ gameId }: Props) => {
   if (!first) return null;
 
   return (
-    <video autoPlay controls src={first.data[480]} poster={first.preview} />
+    <video autoPlay controls src={first.data['480']} poster={first.preview} />
   );
 };
 
