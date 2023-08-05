@@ -1,7 +1,8 @@
-import { Heading, useColorMode } from '@chakra-ui/react';
+import { Heading } from '@chakra-ui/react';
 import usePlatforms from '../hooks/usePlatforms';
 import { useGenres } from '../hooks/useGenres';
 import useGameQueryStore from '../store';
+import EntitiyColor from '../utils/entitiyColor';
 
 const AppHeading = () => {
   const gameQuery = useGameQueryStore((s) => s.gameQuery);
@@ -20,13 +21,13 @@ const AppHeading = () => {
     .charAt(0)
     .toUpperCase()}${selectedPlatformHeading.slice(1)}`;
 
-  const { colorMode } = useColorMode();
+  const { color } = EntitiyColor();
   const suffix = `${selectedGenreHeading === 'TOP PICKS' ? '' : 'Games'}`;
 
   return (
     <>
       <Heading
-        color={`${colorMode === 'dark' ? '#6dc849' : '#671ddf'}`}
+        color={color}
         fontWeight={'500'}
         fontSize={'8xl'}
         fontFamily={'system'}
