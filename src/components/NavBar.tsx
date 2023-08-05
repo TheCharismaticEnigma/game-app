@@ -13,7 +13,7 @@ import {
 } from '@chakra-ui/react';
 import { useRef } from 'react';
 
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import logo from '../assets/logo.webp';
 import useGameQueryStore from '../store';
 
@@ -24,7 +24,8 @@ const NavBar = () => {
 
   const { colorMode, toggleColorMode } = useColorMode();
 
-  const location = useLocation();
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
 
   return (
     <>
@@ -39,7 +40,8 @@ const NavBar = () => {
           <Link
             to={'/'}
             onClick={() => {
-              if (location.pathname === '/') window.location.reload();
+              if (pathname === '/') window.location.reload();
+              else navigate('/');
             }}
           >
             <Image
@@ -60,9 +62,12 @@ const NavBar = () => {
               event.preventDefault();
               const { current } = inputRef;
 
-              if (current && current.value.length > 0) {
+              if (current) {
                 setSearchQuery(current.value);
+                navigate('/'); // go to the home page
               }
+
+              //
             }}
           >
             <SearchIcon

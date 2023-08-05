@@ -25,8 +25,8 @@ const GameDetailPage = () => {
         {game?.name && (
           <Heading
             color={color}
-            textAlign={{ base: 'left', md: 'center' }}
-            fontSize={{ base: '4rem', md: '6rem' }}
+            textAlign={{ base: 'left', md: 'left' }}
+            fontSize={{ base: '4rem', md: '7rem' }}
             fontFamily={'system'}
           >
             {game?.name}
