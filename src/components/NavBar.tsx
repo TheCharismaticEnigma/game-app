@@ -64,7 +64,7 @@ const NavBar = () => {
               loading="lazy"
               cursor={'pointer'}
               transition={'filter 300ms'}
-              _hover={{ filter: `drop-shadow(0px 0px 1em ${color})` }}
+              _hover={{ filter: `drop-shadow(0px 0px 0.5em ${color})` }}
             />
           </Link>
         </Box>
