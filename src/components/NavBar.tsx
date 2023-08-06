@@ -16,6 +16,7 @@ import { useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import logo from '../assets/logo.webp';
 import useGameQueryStore from '../store';
+import EntitiyColor from '../utils/entitiyColor';
 
 const NavBar = () => {
   const setSearchQuery = useGameQueryStore((s) => s.setSearchQuery);
@@ -26,6 +27,17 @@ const NavBar = () => {
 
   const { pathname } = useLocation();
   const navigate = useNavigate();
+
+  const { color } = EntitiyColor();
+
+  /* 
+.logo {
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+} */
 
   return (
     <>
@@ -51,6 +63,8 @@ const NavBar = () => {
               alt="Website Logo"
               loading="lazy"
               cursor={'pointer'}
+              transition={'filter 300ms'}
+              _hover={{ filter: `drop-shadow(0px 0px 1em ${color})` }}
             />
           </Link>
         </Box>
