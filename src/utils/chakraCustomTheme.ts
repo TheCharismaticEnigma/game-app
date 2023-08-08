@@ -7,6 +7,10 @@ const config: ThemeConfig = {
 
 const palette = {
   colors: {
+    green: {
+      200: '#1DB954',
+      500: '#1DB954',
+    },
     gray: {
       50: '#f9f9f9',
       100: '#ededed',
