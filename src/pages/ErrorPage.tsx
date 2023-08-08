@@ -1,4 +1,3 @@
-import { Link, isRouteErrorResponse, useRouteError } from 'react-router-dom';
 import {
   Box,
   Button,
@@ -11,6 +10,7 @@ import {
   Stack,
   Text,
 } from '@chakra-ui/react';
+import { Link } from 'react-router-dom';
 
 import logo from '../assets/logo.webp';
 import NavBar from '../components/NavBar';
