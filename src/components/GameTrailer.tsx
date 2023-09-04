@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import useTrailers from '../hooks/useTrailers';
 
 interface Props {
@@ -5,6 +6,14 @@ interface Props {
 }
 
 const GameTrailer = ({ gameId }: Props) => {
+  useEffect(() => {
+    const videoEl: HTMLVideoElement | null = document.getElementById(
+      'gameTrailer'
+    ) as HTMLVideoElement;
+
+    if (videoEl) videoEl.volume = 0.3;
+  }, []);
+
   const { data, error, isLoading } = useTrailers(gameId);
 
   if (error) throw error;
@@ -15,7 +24,13 @@ const GameTrailer = ({ gameId }: Props) => {
   if (!first) return null;
 
   return (
-    <video autoPlay controls src={first.data['max']} poster={first.preview} />
+    <video
+      id="gameTrailer"
+      autoPlay
+      controls
+      src={first.data['max']}
+      poster={first.preview}
+    />
   );
 };
 

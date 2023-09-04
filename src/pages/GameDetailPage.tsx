@@ -16,7 +16,6 @@ const GameDetailPage = () => {
   {
     /* ErrorPage will catch it and we'll log it in permanent place somewhere. */
   }
-  console.log(game);
 
   return (
     <>
