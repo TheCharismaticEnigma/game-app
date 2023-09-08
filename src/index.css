@@ -25,3 +25,18 @@ a {
 }
 
 /* Apply styles on component wrappers. So won't be repetitive.  */
+
+/* Custom Scrollbar for the apps */
+
+::-webkit-scrollbar {
+  width: 4.5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(84, 84, 84, 0.7);
+  transition: all 100ms ease-out;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(211, 211, 211, 0.6);
+}

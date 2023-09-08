@@ -54,15 +54,19 @@ function AppContent() {
           base: `"main"`,
           md: `"aside main" `,
         }}
+        gap={'0.5rem'}
       >
         <GridItem
           area={'aside'}
+          position={'sticky'}
+          top={'0.5rem'}
           width={'min(100%, 22rem)'}
           display={{
             base: 'none',
             md: 'block',
           }}
-          height={'fit-content'}
+          height={'90vh'}
+          overflow={'hidden auto '}
         >
           <Box>
             {loadingGenres && (
