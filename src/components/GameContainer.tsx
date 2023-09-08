@@ -25,20 +25,19 @@ const GameContainer = (Props: GameContainerProps) => {
   };
 
   const cardView = {
-    width: 'min(100%, 75rem)',
+    width: 'min(100%, 64rem)',
     height: '60rem',
     mediaHeight: '75%',
     gridTemplateColumns: {
       base: 'repeat(1,1fr)',
       md: 'repeat(1,1fr)',
-      lg: 'repeat(1,1fr)',
+      lg: 'repeat(2,1fr)',
     },
   };
 
   return (
     <>
       <Grid
-        border={'1x solid green'}
         as={'ul'}
         padding={'0 0.5rem '}
         gridTemplateColumns={
@@ -46,7 +45,11 @@ const GameContainer = (Props: GameContainerProps) => {
             ? gridView.gridTemplateColumns
             : cardView.gridTemplateColumns
         }
-        justifyItems={gridDisplayIsActive ? 'stretch' : 'center'}
+        justifyItems={{
+          base: 'center',
+          md: `${gridDisplayIsActive ? 'stretch' : 'center'}`,
+          lg: `${gridDisplayIsActive ? 'stretch' : 'center'}`,
+        }}
         gap={'2rem'}
         overflow={'hidden'}
       >
@@ -60,13 +63,16 @@ const GameContainer = (Props: GameContainerProps) => {
             return (
               <GridItem
                 as={'li'}
+                key={game.id}
+                width={{
+                  base: 'max(80%, 32rem)',
+                  md: 'auto',
+                  lg: 'auto',
+                }}
                 _hover={{
                   transform: 'scale(1.02)',
                   transition: 'transform 300ms ease-in-out',
                 }}
-                width={gridDisplayIsActive ? gridView.width : cardView.width}
-                height={gridDisplayIsActive ? gridView.height : cardView.height}
-                key={game.id}
               >
                 <GameCard
                   game={game}

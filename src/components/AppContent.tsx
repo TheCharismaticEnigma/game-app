@@ -55,12 +55,6 @@ function AppContent() {
           md: `"aside main" `,
         }}
       >
-        {/*  
-        NavBar is permanently on top. 
-        <GridItem area={'nav'}>
-          <NavBar />
-        </GridItem> */}
-
         <GridItem
           area={'aside'}
           width={'min(100%, 22rem)'}
@@ -89,8 +83,18 @@ function AppContent() {
         </GridItem>
 
         <GridItem area={'main'} overflow={'auto'} scrollBehavior={'smooth'}>
-          <Box w={'100%'} pr={'1rem'}>
-            <Flex mb={'3rem'} gap={'2rem'} as={'div'} direction={'column'}>
+          <Box pr={'1rem'}>
+            <Flex
+              alignItems={{
+                base: 'center',
+                md: 'flex-start',
+                lg: 'flex-start',
+              }}
+              mb={'3rem'}
+              gap={'2rem'}
+              as={'div'}
+              direction={'column'}
+            >
               <AppHeading />
 
               <Dropdowns

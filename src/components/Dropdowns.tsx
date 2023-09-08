@@ -24,6 +24,11 @@ const Dropdowns = ({ setDisplay }: DropdownProps) => {
     <>
       <Flex
         as="div"
+        width={{
+          base: 'auto',
+          md: '100%',
+          lg: '100%',
+        }}
         padding={'0 0.5rem '}
         justifyContent={'space-between'}
         alignItems={'center'}
