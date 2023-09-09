@@ -1,4 +1,4 @@
-import { Grid, GridItem, grid } from '@chakra-ui/react';
+import { Grid, GridItem } from '@chakra-ui/react';
 import { Game } from '../hooks/useGames';
 import CardSkeleton from './CardSkeleton';
 import GameCard from './GameCard';
@@ -84,7 +84,7 @@ const GameContainer = (Props: GameContainerProps) => {
                 overflow={'visible'}
                 _hover={{
                   transform: 'scale(1.005)',
-                  transition: 'transform 300ms ease-in-out',
+                  transition: 'transform 200ms ease-in-out',
                 }}
               >
                 <GameCard

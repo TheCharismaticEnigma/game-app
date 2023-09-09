@@ -3,6 +3,7 @@ import { GameQuery } from '../store';
 import HttpService, { FetchResponse } from '../utils/RogueHttpService';
 import { Platform } from '../entities/Platform';
 import staleTime from '../utils/staleTime';
+
 interface Game {
   id: number;
   name: string;
@@ -11,6 +12,15 @@ interface Game {
   metacritic: number;
   parent_platforms: { platform: Platform }[];
   rating_top: number;
+  released?: string;
+  playtime?: number;
+  ratings_count?: number;
+  reviews_count?: number;
+  genres?: {
+    id: number;
+    name: string;
+    slug: string;
+  }[];
 }
 
 const gameService = new HttpService<Game>('/games');

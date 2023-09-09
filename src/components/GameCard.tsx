@@ -7,7 +7,7 @@ import {
   Heading,
   Image,
   Stack,
-  Text,
+  useColorMode,
 } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import { Game } from '../hooks/useGames';
@@ -16,6 +16,7 @@ import RatingIcon from '../utils/RatingIcons';
 import getCroppedImageUrl from '../utils/getCroppedImageUrl';
 import CriticScore from './CriticScore';
 import { useState } from 'react';
+import GameCardDetails from './GameCardDetails';
 
 interface CardProps {
   game: Game;
@@ -24,6 +25,7 @@ interface CardProps {
 
 const GameCard = (Props: CardProps) => {
   const { game, mediaHeight } = Props;
+  const isDarkMode = useColorMode().colorMode === 'dark';
 
   const {
     background_image,
@@ -32,13 +34,7 @@ const GameCard = (Props: CardProps) => {
     parent_platforms,
     rating_top,
     slug,
-    game_series_count,
-    playtime,
-    developers,
-    released,
   } = game;
-
-  // console.log(game);
 
   // Store HOVERED STATE IN A STATE VARIABLE. Display only if hovered.
   const [isHovered, setIsHovered] = useState(false);
@@ -57,7 +53,7 @@ const GameCard = (Props: CardProps) => {
           minH={'100%'}
           height={'auto'}
           zIndex={isHovered ? 1 : -1}
-          background={isHovered ? 'gray.800' : 'gray.900'}
+          background={isDarkMode ? (isHovered ? 'gray.900' : 'gray.700') : ''}
           onMouseEnter={() => {
             setIsHovered(true);
           }}
@@ -103,22 +99,7 @@ const GameCard = (Props: CardProps) => {
               </Flex>
             </Stack>
 
-            {isHovered && (
-              <Stack mt={4} spacing={5}>
-                <Text>Gracias a todos</Text>
-                <Text>Gracias a todos</Text>
-                <Text>Gracias a todos</Text>
-                <Text>Gracias a todos</Text>
-                <Text>Gracias a todos</Text>
-                <Text>Gracias a todos</Text>
-                <Text>Gracias a todos</Text>
-                <Text>Gracias a todos</Text>
-                <Text>Gracias a todos</Text>
-                <Text>Gracias a todos</Text>
-                <Text>Gracias a todos</Text>
-                <Text>Gracias a todos</Text>
-              </Stack>
-            )}
+            {isHovered && <GameCardDetails game={game} />}
           </CardBody>
         </Card>
       </Link>
