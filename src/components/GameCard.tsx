@@ -43,18 +43,21 @@ const GameCard = (Props: CardProps) => {
   // Store HOVERED STATE IN A STATE VARIABLE. Display only if hovered.
   const [isHovered, setIsHovered] = useState(false);
 
+  const shadowColor = isHovered ? 'black' : 'rgb(50,50,50) inset';
+
   return (
     <>
       <Link to={`/games/${slug}`}>
         <Card
-          boxShadow={'0.5px 0.5px 3px 0  black'}
+          boxShadow={`0.2px 0.2px 3px 0 ${shadowColor}`}
           cursor={'pointer'}
           borderRadius={'3xl'}
           overflow={'hidden'}
           width={'100%'}
           minH={'100%'}
           height={'auto'}
-          zIndex={isHovered ? 100 : -1}
+          zIndex={isHovered ? 1 : -1}
+          background={isHovered ? 'gray.800' : 'gray.900'}
           onMouseEnter={() => {
             setIsHovered(true);
           }}
