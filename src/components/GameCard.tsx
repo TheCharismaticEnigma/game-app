@@ -7,6 +7,7 @@ import {
   Heading,
   Image,
   Stack,
+  Text,
 } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import { Game } from '../hooks/useGames';
@@ -14,6 +15,7 @@ import PlatformIcon from '../utils/PlatformIcons';
 import RatingIcon from '../utils/RatingIcons';
 import getCroppedImageUrl from '../utils/getCroppedImageUrl';
 import CriticScore from './CriticScore';
+import { useState } from 'react';
 
 interface CardProps {
   game: Game;
@@ -30,7 +32,16 @@ const GameCard = (Props: CardProps) => {
     parent_platforms,
     rating_top,
     slug,
+    game_series_count,
+    playtime,
+    developers,
+    released,
   } = game;
+
+  // console.log(game);
+
+  // Store HOVERED STATE IN A STATE VARIABLE. Display only if hovered.
+  const [isHovered, setIsHovered] = useState(false);
 
   return (
     <>
@@ -41,7 +52,15 @@ const GameCard = (Props: CardProps) => {
           borderRadius={'3xl'}
           overflow={'hidden'}
           width={'100%'}
-          height={'100%'}
+          minH={'100%'}
+          height={'auto'}
+          zIndex={isHovered ? 100 : -1}
+          onMouseEnter={() => {
+            setIsHovered(true);
+          }}
+          onMouseLeave={() => {
+            setIsHovered(false);
+          }}
         >
           <Box h={mediaHeight}>
             <Image
@@ -80,6 +99,23 @@ const GameCard = (Props: CardProps) => {
                 <RatingIcon rating={rating_top} />
               </Flex>
             </Stack>
+
+            {isHovered && (
+              <Stack mt={4} spacing={5}>
+                <Text>Gracias a todos</Text>
+                <Text>Gracias a todos</Text>
+                <Text>Gracias a todos</Text>
+                <Text>Gracias a todos</Text>
+                <Text>Gracias a todos</Text>
+                <Text>Gracias a todos</Text>
+                <Text>Gracias a todos</Text>
+                <Text>Gracias a todos</Text>
+                <Text>Gracias a todos</Text>
+                <Text>Gracias a todos</Text>
+                <Text>Gracias a todos</Text>
+                <Text>Gracias a todos</Text>
+              </Stack>
+            )}
           </CardBody>
         </Card>
       </Link>
