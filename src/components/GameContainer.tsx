@@ -26,7 +26,7 @@ const GameContainer = (Props: GameContainerProps) => {
 
   const cardView = {
     width: 'min(100%, 64rem)',
-    height: '60rem',
+    height: 'min(100%, 51rem)',
     mediaHeight: '75%',
     gridTemplateColumns: {
       base: 'repeat(1,1fr)',
@@ -73,12 +73,17 @@ const GameContainer = (Props: GameContainerProps) => {
                 }}
                 height={{
                   base: '36rem ',
-                  md: cardHeight,
-                  lg: cardHeight,
+                  md: `min(${cardHeight}, 51rem)`,
+                  lg: `min(${cardHeight}, 45rem)`,
+                }}
+                maxH={{
+                  base: '36rem',
+                  md: '51rem',
+                  lg: '45rem',
                 }}
                 overflow={'visible'}
                 _hover={{
-                  transform: 'scale(1.02)',
+                  transform: 'scale(1.005)',
                   transition: 'transform 300ms ease-in-out',
                 }}
               >
