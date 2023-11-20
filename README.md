@@ -4,7 +4,7 @@ This is a `Fully Responsive` web application which was inspired by the RAWG web 
 
 `Meticulously created using the official RAWG Web Api`, this app provides all the major features like  dynamically rendering the games, filtered results, infinite scrolling etc. 
 
-The app is programmed using `React and Typescript` and `Firebase` was used as a deployment solution, thereby adhering to the industry standard. 
+The app is programmed using `React and Typescript` and `Vercel` was used as a deployment solution, thereby adhering to the industry standard. 
 
 ## Employed Technologies : 
 ```js
